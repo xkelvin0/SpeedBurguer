@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SpeedBurger - El mejor fast food de la ciudad. Hamburguesas, papas, combos y más. Rápido, fresco y delicioso." />
+  <title>SpeedBurger | Fast Food de Primera</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================================================
+       NAVBAR
+       ================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-logo">
+      <img src="img/logo.png" alt="Logo SpeedBurger" class="logo-img" />
+      <span class="nav-logo-text"><span class="nav-logo-speed">Speed</span><span class="nav-logo-burger">Burger</span></span>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <ul class="navbar-links" id="navbar-links">
+      <li><a href="#inicio" class="active">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="productos.html" class="btn-nav">Hacer Pedido</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================================================
+       SECCIÓN 1: INICIO / PORTADA PRINCIPAL (HERO)
+       ================================================ -->
+  <section class="hero" id="inicio">
+    <img src="img/hero2.png" alt="SpeedBurger Fast Food" class="hero-bg" />
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <span class="hero-badge">⚡ Rápido · Fresco · Delicioso</span>
+      <h1 class="hero-title">
+        El Sabor Que<br /><span>Te Mueve</span>
+      </h1>
+      <p class="hero-subtitle">
+        En SpeedBurger encontrarás las mejores hamburguesas, combos irresistibles
+        y papas crujientes. ¡Hecho al instante, con ingredientes frescos!
+      </p>
+      <div class="hero-buttons">
+        <a href="#productos" class="btn-primary">🍔 Ver Menú</a>
+        <a href="contacto.html" class="btn-secondary">📍 Encuéntranos</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">+15K</div>
+        <div class="stat-label">Clientes felices</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">+30</div>
+        <div class="stat-label">Platos en menú</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.9⭐</div>
+        <div class="stat-label">Calificación</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       SECCIÓN 1.5: VIDEO PROMOCIONAL
+       ================================================ -->
+  <section class="promo-video-section" id="promo-video" style="padding: 90px 8%; background: var(--negro); text-align: center;">
+    <div class="section-header" style="margin-bottom: 20px;">
+      <span class="section-tag">¡Sabor Irresistible!</span>
+      <h2 class="section-title">Mira Nuestra <span>Experiencia</span></h2>
+      <p class="section-desc">
+        Hamburguesas, pollo broaster, salchipapas y más en solo segundos.
+      </p>
+    </div>
+    
+    <div class="promo-grid">
+      <!-- Izquierda: Video -->
+      <div class="promo-video-wrapper">
+        <video width="100%" controls>
+          <source src="video/video_promocional_speedburguer.mp4" type="video/mp4" />
+          Tu navegador no soporta la etiqueta de video.
+        </video>
+      </div>
+
+      <!-- Derecha: Texto y características -->
+      <div class="promo-text-content">
+        <h3>Puro Sabor En <span>Acción</span></h3>
+        <p>Seleccionamos diariamente ingredientes frescos para darte la mejor calidad y ese sabor inconfundible en cada mordida. ¡Mira nuestro restaurante en acción!</p>
+        
+        <div class="promo-features">
+          <div class="promo-feature-item">
+            <div class="feature-icon-box">🍔</div>
+            <div class="feature-text-box">
+              <h4>Hamburguesas Premium</h4>
+              <p>Carne 100% de res, asada a la perfección.</p>
+            </div>
+          </div>
+          <div class="promo-feature-item">
+            <div class="feature-icon-box">🍗</div>
+            <div class="feature-text-box">
+              <h4>Pollo Súper Crujiente</h4>
+              <p>La receta secreta con un empanizado inigualable.</p>
+            </div>
+          </div>
+          <div class="promo-feature-item">
+            <div class="feature-icon-box">🍟</div>
+            <div class="feature-text-box">
+              <h4>Combos Abundantes</h4>
+              <p>Salchipapas y piqueos ideales para compartir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       SECCIÓN 2: INFORMACIÓN / DESCRIPCIÓN
+       ================================================ -->
+  <section class="info-section" id="info">
+    <div class="info-grid">
+      <div class="info-text">
+        <span class="section-tag">¿Quiénes somos?</span>
+        <h2 class="section-title">
+          Fast Food con<br /><span>Sabor Real</span>
+        </h2>
+        <p class="section-desc">
+          En SpeedBurger creemos que comer rápido no significa comer mal.
+          Usamos ingredientes frescos, pan artesanal y carnes de primera calidad
+          para darte la mejor experiencia en cada mordida.
+        </p>
+
+        <div class="info-features">
+          <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <h4>Siempre Fresco</h4>
+            <p>Ingredientes frescos todos los días, sin conservantes.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h4>Ultra Rápido</h4>
+            <p>Tu pedido listo en menos de 10 minutos.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💯</div>
+            <h4>Calidad Premium</h4>
+            <p>Carne 100% res, pan artesanal y salsas propias.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h4>Delivery Express</h4>
+            <p>Llevamos tu pedido a domicilio en tiempo récord.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-image">
+        <img src="img/burger.png" alt="Hamburguesa SpeedBurger" />
+        <div class="info-image-badge">
+          <span class="big-num">+8</span>
+          <span class="small-txt">años de experiencia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       SECCIÓN 3: 3 PRODUCTOS PRINCIPALES (CARDS)
+       ================================================ -->
+  <section class="productos-section" id="productos">
+    <div class="section-header">
+      <span class="section-tag">Nuestro Menú</span>
+      <h2 class="section-title">Los Más <span>Pedidos</span></h2>
+      <p class="section-desc">
+        Nuestros tres productos estrella, los favoritos de nuestros clientes. ¡Elige el tuyo!
+      </p>
+    </div>
+
+    <div class="productos-grid">
+
+      <!-- Producto 1: Hamburguesa Clásica -->
+      <div class="producto-card" id="prod-hamburguesa">
+        <span class="producto-card-badge">⭐ Favorito</span>
+        <div class="producto-img-wrapper">
+          <img src="img/burger.png" alt="Hamburguesa Clásica SpeedBurger" class="producto-img" />
+        </div>
+        <div class="producto-body">
+          <h3 class="producto-name">Hamburguesa Clásica</h3>
+          <p class="producto-desc">
+            Carne de res 200g, queso cheddar derretido, lechuga fresca,
+            tomate, pepinillos y nuestra salsa secreta.
+          </p>
+          <div class="producto-footer">
+            <span class="producto-precio">S/. 18.90</span>
+            <button class="btn-ordenar" id="btn-hamburguesa">🛒 Ordenar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2: Salchipapa Especial -->
+      <div class="producto-card" id="prod-combo">
+        <span class="producto-card-badge">🔥 Oferta Especial</span>
+        <div class="producto-img-wrapper">
+          <img src="img/salchipapa_especial.png" alt="Salchipapa Especial SpeedBurger" class="producto-img" style="object-position: center bottom;" />
+        </div>
+        <div class="producto-body">
+          <h3 class="producto-name">Salchipapa Especial</h3>
+          <p class="producto-desc">
+            Abundante porción de papas crujientes, rodajas de salchicha jugosa, full cremas y una Inca Kola bien helada. ¡El combo ideal!
+          </p>
+          <div class="producto-footer">
+            <span class="producto-precio">S/. 16.50</span>
+            <button class="btn-ordenar" id="btn-combo">🛒 Ordenar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3: Nuggets Especial -->
+      <div class="producto-card" id="prod-nuggets">
+        <span class="producto-card-badge">🍗 Nuevo</span>
+        <div class="producto-img-wrapper">
+          <img src="img/nuggets.png" alt="Nuggets Especial SpeedBurger" class="producto-img" />
+        </div>
+        <div class="producto-body">
+          <h3 class="producto-name">Nuggets Especial</h3>
+          <p class="producto-desc">
+            10 nuggets de pollo crujientes con 2 salsas a elegir:
+            BBQ, miel mostaza, ranch o picante. ¡Irresistibles!
+          </p>
+          <div class="producto-footer">
+            <span class="producto-precio">S/. 15.90</span>
+            <button class="btn-ordenar" id="btn-nuggets">🛒 Ordenar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================
+       SECCIÓN 4: ENFOQUE AL CLIENTE
+       ================================================ -->
+  <section class="enfoque-section" id="enfoque">
+    <div class="enfoque-inner">
+
+      <div class="enfoque-texto">
+        <span class="section-tag">Nuestros Clientes</span>
+        <h2 class="section-title">
+          Tu Satisfacción<br />Es Nuestra <span>Prioridad</span>
+        </h2>
+        <p class="section-desc">
+          Más de 15,000 clientes ya forman parte de la familia SpeedBurger.
+          Cada pedido lo hacemos con cariño y compromiso porque sabemos
+          que regresas por la calidad.
+        </p>
+
+        <div class="enfoque-stats">
+          <div class="enfoque-stat">
+            <span class="num">15K+</span>
+            <span class="lbl">Clientes satisfechos</span>
+          </div>
+          <div class="enfoque-stat">
+            <span class="num">98%</span>
+            <span class="lbl">Recomendarían SpeedBurger</span>
+          </div>
+          <div class="enfoque-stat">
+            <span class="num">4.9⭐</span>
+            <span class="lbl">Calificación promedio</span>
+          </div>
+          <div class="enfoque-stat">
+            <span class="num">&lt;10min</span>
+            <span class="lbl">Tiempo de espera</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio-grid">
+        <div class="testimonio-card" id="testimonio-1">
+          <div class="testimonio-stars">★★★★★</div>
+          <p class="testimonio-text">
+            "La mejor hamburguesa que he probado en Lima. Siempre fresca y el servicio
+            es súper rápido. ¡Ya soy cliente fiel!"
+          </p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">CM</div>
+            <div>
+              <div class="testimonio-nombre">Carlos Mendoza</div>
+              <div class="testimonio-cargo">Cliente desde 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card" id="testimonio-2">
+          <div class="testimonio-stars">★★★★★</div>
+          <p class="testimonio-text">
+            "El combo de papas y bebida es increíble por ese precio. Pido por delivery
+            y siempre llega caliente y a tiempo."
+          </p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">LR</div>
+            <div>
+              <div class="testimonio-nombre">Lucía Ramírez</div>
+              <div class="testimonio-cargo">Cliente frecuente</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card" id="testimonio-3">
+          <div class="testimonio-stars">★★★★★</div>
+          <p class="testimonio-text">
+            "Los nuggets son adictivos, literalmente los pido todas las semanas.
+            El sabor es muy consistente. ¡Recomendado 100%!"
+          </p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">JP</div>
+            <div>
+              <div class="testimonio-nombre">Jorge Paredes</div>
+              <div class="testimonio-cargo">Fan de los nuggets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================
+       FOOTER / PIE DE PÁGINA
+       ================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+
+      <!-- Columna 1: Marca + Redes Sociales -->
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="SpeedBurger Logo" class="footer-logo-img" />
+        <p>
+          El sabor que te mueve. Fast food de primera calidad,
+          hecho con ingredientes frescos y mucho amor. ¡Visítanos hoy!
+        </p>
+        <div class="redes-title">Síguenos</div>
+        <div class="redes-sociales">
+          <a href="#" class="red-social" id="rs-instagram" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a href="#" class="red-social" id="rs-facebook" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 320 512" width="20" height="20" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+          <a href="#" class="red-social" id="rs-tiktok" title="TikTok" aria-label="TikTok"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+          <a href="#" class="red-social" id="rs-whatsapp" title="WhatsApp" aria-label="WhatsApp"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Navegación -->
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">🏠 Inicio</a></li>
+          <li><a href="productos.html">🍔 Productos</a></li>
+          <li><a href="nosotros.html">👥 Nosotros</a></li>
+          <li><a href="contacto.html">📞 Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Correos / Contacto -->
+      <div class="footer-col">
+        <h4>Contáctanos</h4>
+        <a href="mailto:info@SpeedBurger.com" class="footer-correo" id="correo-info">
+          📧 info@SpeedBurger.com
+        </a>
+        <a href="mailto:pedidos@SpeedBurger.com" class="footer-correo" id="correo-pedidos">
+          📦 pedidos@SpeedBurger.com
+        </a>
+        <a href="tel:+51936726266" class="footer-correo" id="tel-principal">
+          📱 +51 936 726 266
+        </a>
+        <a href="#" class="footer-correo">
+          📍 Av. Principal 123, Lima
+        </a>
+      </div>
+
+      <!-- Columna 4: Empresas Aliadas -->
+      <div class="footer-col">
+        <h4>Empresas Aliadas</h4>
+        <div class="aliadas-grid">
+          <a href="https://www.rappi.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-rappi">🛵 Rappi</a>
+          <a href="https://www.pedidosya.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-pedidos">🥡 PedidosYa</a>
+          <a href="https://glovoapp.com/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-glovo">⚡ Glovo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 <span>SpeedBurger</span>. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para los amantes del fast food</p>
+    </div>
+  </footer>
+
+  <!-- Botón Subir al Top -->
+  <a href="#inicio" class="btn-top" id="btnTop" title="Subir al inicio">
+    ▲
+  </a>
+
+  <!-- Script básico para cambio de color navbar y botón top -->
+  <script>
+    window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      const btnTop = document.getElementById('btnTop');
+      
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(17, 17, 17, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+      }
+
+      if (window.scrollY > 400) {
+        btnTop.classList.add('show');
+      } else {
+        btnTop.classList.remove('show');
+      }
+    });
+
+    // Lógica del menú hamburguesa
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarLinks = document.getElementById('navbar-links');
+    
+    if (menuToggle && navbarLinks) {
+      menuToggle.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active');
+        // Opcional: Cambiar el icono al hacer clic
+        if (navbarLinks.classList.contains('active')) {
+          menuToggle.textContent = '✕';
+        } else {
+          menuToggle.textContent = '☰';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Conoce más sobre SpeedBurger, nuestra estructura organizacional, objetivos y el equipo detrás de todo el sabor." />
+  <title>SpeedBurger | Nosotros</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar" style="background: rgba(17, 17, 17, 0.98);">
+    <div class="navbar-logo">
+      <a href="index.html" style="display:flex; align-items:center; gap:10px;">
+        <img src="img/logo.png" alt="Logo SpeedBurger" class="logo-img" />
+        <span class="nav-logo-text"><span class="nav-logo-speed">Speed</span><span
+            class="nav-logo-burger">Burger</span></span>
+      </a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <ul class="navbar-links" id="navbar-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="nosotros.html" class="active">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="productos.html" class="btn-nav">Hacer Pedido</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO / PORTADA -->
+  <section class="hero" id="inicio">
+    <img src="img/hero2.png" alt="SpeedBurger Nosotros" class="hero-bg"
+      style="object-position: center 40%;" />
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" style="padding-top: 80px;">
+      <span class="hero-badge">👥 Conoce al Equipo</span>
+      <h1 class="hero-title">
+        Sobre <span>Nosotros</span>
+      </h1>
+      <p class="hero-subtitle">
+        Descubre cómo estamos organizados, nuestros objetivos y el talento humano que hace posible el mejor sabor en tiempo récord.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- OBJETIVOS -->
+  <section class="enfoque-section" id="objetivos" style="background: var(--gris-oscuro); padding-top: 80px; padding-bottom: 80px;">
+    <div class="enfoque-inner">
+      <div class="enfoque-texto">
+        <span class="section-tag">Nuestras Metas</span>
+        <h2 class="section-title">
+          Objetivo <span>Principal</span>
+        </h2>
+        <p class="section-desc" style="font-size: 1.1rem; color: var(--blanco);">
+          "Convertirnos en la cadena de comida rápida líder en sabor, calidad y velocidad de servicio en toda la ciudad."
+        </p>
+      </div>
+
+      <div class="enfoque-texto">
+        <span class="section-tag">Estrategia</span>
+        <h2 class="section-title">
+          Objetivos <span>Específicos</span>
+        </h2>
+        <ul style="list-style: none; color: var(--texto-gris); display: flex; flex-direction: column; gap: 15px;">
+          <li style="display: flex; gap: 15px; align-items: flex-start;">
+            <div class="feature-icon-box" style="width: 40px; height: 40px; min-width: 40px; font-size: 1.2rem;">🥬</div>
+            <div>
+              <strong style="color: var(--blanco);">Calidad de Ingredientes:</strong> Ofrecer insumos 100% frescos en todos nuestros platillos.
+            </div>
+          </li>
+          <li style="display: flex; gap: 15px; align-items: flex-start;">
+            <div class="feature-icon-box" style="width: 40px; height: 40px; min-width: 40px; font-size: 1.2rem;">⏱️</div>
+            <div>
+              <strong style="color: var(--blanco);">Eficiencia Operativa:</strong> Optimizar los procesos para garantizar tiempos de entrega menores a 10 minutos.
+            </div>
+          </li>
+          <li style="display: flex; gap: 15px; align-items: flex-start;">
+            <div class="feature-icon-box" style="width: 40px; height: 40px; min-width: 40px; font-size: 1.2rem;">⭐</div>
+            <div>
+              <strong style="color: var(--blanco);">Satisfacción del Cliente:</strong> Mantener una calificación promedio de 4.9 o más en nuestras plataformas.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA ORGANIZACIONAL -->
+  <section class="info-section" id="mapa-organizacional" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="section-header">
+      <span class="section-tag">Estructura</span>
+      <h2 class="section-title">Mapa <span>Organizacional</span></h2>
+      <p class="section-desc">Así está conformado nuestro equipo de trabajo para brindarte la mejor experiencia.</p>
+    </div>
+
+    <!-- BOTON MAPA Y MAPA OCULTO -->
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="btn-toggle-mapa" class="btn-primary" onclick="showMapa()" style="padding: 12px 30px; font-size: 1rem;">Ver Mapa Organizacional</button>
+    </div>
+
+    <div id="mapa-container" style="display: none; text-align: center; max-width: 1000px; margin: 40px auto 0;">
+      <img src="img/mapa_org.svg" alt="Mapa Organizacional de SpeedBurger" class="org-map-img" onerror="this.src='https://via.placeholder.com/1000x500/242424/FFBE00?text=Mapa+Organizacional'" />
+    </div>
+  </section>
+
+  <!-- C.V. INTEGRANTE -->
+  <section class="info-section" id="cv" style="background: var(--gris-oscuro); padding-top: 80px; padding-bottom: 80px;">
+    <div class="section-header">
+      <span class="section-tag">Talento</span>
+      <h2 class="section-title">C.V. <span>Integrante</span></h2>
+      <p class="section-desc">Conoce el perfil del desarrollador principal del proyecto.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-member">
+        <h3>Kelvin Jesus Acevedo Huarachi</h3>
+        <p>Coordinador Líder</p>
+        <button class="btn-primary" onclick="showCV('cv-kelvin')" style="padding: 10px 20px; font-size: 0.9rem;">Ver C.V.</button>
+      </div>
+      <div class="team-member">
+        <h3>Campusano Solis Angel Leonel</h3>
+        <p>Desarrollador FullStack</p>
+        <button class="btn-primary" onclick="showCV('cv-campusano')" style="padding: 10px 20px; font-size: 0.9rem;">Ver C.V.</button>
+      </div>
+      <div class="team-member">
+        <h3>Añorga Pinedo Paolo Alexander</h3>
+        <p>Analista QA</p>
+        <button class="btn-primary" onclick="showCV('cv-anorga')" style="padding: 10px 20px; font-size: 0.9rem;">Ver C.V.</button>
+      </div>
+      <div class="team-member">
+        <h3>Castillo Sullón Juan Pablo</h3>
+        <p>Desarrollador Frontend</p>
+        <button class="btn-primary" onclick="showCV('cv-castillo')" style="padding: 10px 20px; font-size: 0.9rem;">Ver C.V.</button>
+      </div>
+    </div>
+
+    <!-- CV KELVIN -->
+    <div class="cv-card hidden" id="cv-kelvin">
+      <div class="cv-left">
+        <img src="img/perfil_kelvin.png" alt="Foto de Perfil de Kelvin Acevedo" style="object-fit: cover;" onerror="this.src='https://via.placeholder.com/200/D90429/FFFFFF?text=Kelvin'" />
+        <a href="#" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">📄 Descargar C.V.</a>
+      </div>
+      <div class="cv-right">
+        <h3 class="cv-section-title">💻 Capacidad de Programación</h3>
+        <ul class="cv-list">
+          <li><strong>Lenguaje de Programación:</strong> JavaScript, Python, Java, HTML5, CSS3, Dart</li>
+          <li><strong>Base de Datos:</strong> MySQL, MongoDB, PostgreSQL</li>
+          <li><strong>Tecnologías:</strong> Git/GitHub, Visual Studio Code, Figma, Antigravity, Android Studio, Godot y Unity</li>
+        </ul>
+        <h3 class="cv-section-title">🤝 Habilidades Blandas</h3>
+        <ul class="cv-list">
+          <li>Liderazgo y proactividad</li>
+          <li>Trabajo en equipo</li>
+          <li>Comunicación asertiva</li>
+        </ul>
+        <h3 class="cv-section-title">🎓 Certificaciones</h3>
+        <ul class="cv-list">
+          <li>
+            <a href="img/certificado_kelvin.png" target="_blank" style="color: var(--amarillo); text-decoration: underline;">
+              Udemy: La Web desde Cero. Aprende Diseño Web con HTML5 y CSS3 (2026) ↗
+            </a>
+          </li>
+          <li>
+            <a href="img/certificado_git_kelvin.png" target="_blank" style="color: var(--amarillo); text-decoration: underline;">
+              Udemy: Curso completo de Git y GitHub. Prepárate para el Desarrollo (2026) ↗
+            </a>
+          </li>
+          <li>
+            <a href="img/certificado_python_kelvin.png" target="_blank" style="color: var(--amarillo); text-decoration: underline;">
+              Udemy: Python Practicando. Desde 0 hasta Desarrollador en Python (2026) ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CV CAMPUSANO -->
+    <div class="cv-card hidden" id="cv-campusano">
+      <div class="cv-left">
+        <img src="img/perfil_campusano.png" alt="Foto de Perfil de Angel Campusano" style="object-fit: cover;" onerror="this.src='https://via.placeholder.com/200/D90429/FFFFFF?text=Angel'" />
+        <div style="margin-bottom: 15px; color: var(--texto-gris); font-size: 0.9rem; text-align: center; line-height: 1.5;">
+          📧 U23317595@utp.edu.pe<br/>
+          📱 +51 937379768
+        </div>
+        <a href="#" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">📄 Descargar C.V.</a>
+      </div>
+      <div class="cv-right">
+        <h3 class="cv-section-title">💻 Capacidad de Programación</h3>
+        <ul class="cv-list">
+          <li><strong>Lenguaje de Programación:</strong> Java, Python, JavaScript</li>
+          <li><strong>Bases de Datos:</strong> PostgreSQL, Oracle, SQL Server, MongoDB</li>
+          <li><strong>Herramientas y Metodologías:</strong> Git/GitHub, Scrum, MVC</li>
+        </ul>
+        <h3 class="cv-section-title">🤝 Habilidades Blandas</h3>
+        <ul class="cv-list">
+          <li>Trabajo en equipo</li>
+          <li>Proactividad</li>
+          <li>Perseverancia</li>
+        </ul>
+        <h3 class="cv-section-title">🎓 Certificaciones</h3>
+        <ul class="cv-list">
+          <li>Python Essentials 1 – Cisco Networking Academy (2026)</li>
+          <li>SQL Server I – Implementación – CEPS UNI (2024)</li>
+          <li>Especialista en Microsoft Excel 2019</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CV AÑORGA -->
+    <div class="cv-card hidden" id="cv-anorga">
+      <div class="cv-left">
+        <img src="img/perfil.png" alt="Foto de Perfil" onerror="this.src='https://via.placeholder.com/200/D90429/FFFFFF?text=Paolo'" />
+        <a href="#" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">📄 Descargar C.V.</a>
+      </div>
+      <div class="cv-right">
+        <h3 class="cv-section-title">💻 Capacidad de Programación</h3>
+        <ul class="cv-list">
+          <li><strong>Lenguaje de Programación:</strong> Java, Selenium, Cypress</li>
+          <li><strong>Base de Datos:</strong> Consultas SQL</li>
+          <li><strong>Tecnologías:</strong> Postman, API Testing</li>
+        </ul>
+        <h3 class="cv-section-title">🤝 Habilidades Blandas</h3>
+        <ul class="cv-list">
+          <li>Atención al detalle</li>
+          <li>Comunicación de errores asertiva</li>
+          <li>Empatía con el usuario</li>
+        </ul>
+        <h3 class="cv-section-title">🎓 Certificados</h3>
+        <div style="margin-top: 15px;">
+          <a href="#" class="btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Ver Certificados</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CV CASTILLO -->
+    <div class="cv-card hidden" id="cv-castillo">
+      <div class="cv-left">
+        <img src="img/perfil.png" alt="Foto de Perfil" onerror="this.src='https://via.placeholder.com/200/D90429/FFFFFF?text=Juan+Pablo'" />
+        <a href="#" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">📄 Descargar C.V.</a>
+      </div>
+      <div class="cv-right">
+        <h3 class="cv-section-title">💻 Capacidad de Programación</h3>
+        <ul class="cv-list">
+          <li><strong>Lenguaje de Programación:</strong> React, JavaScript, HTML5, CSS3</li>
+          <li><strong>Base de Datos:</strong> Firebase, LocalStorage</li>
+          <li><strong>Tecnologías:</strong> Consumo de APIs REST</li>
+        </ul>
+        <h3 class="cv-section-title">🤝 Habilidades Blandas</h3>
+        <ul class="cv-list">
+          <li>Creatividad y diseño</li>
+          <li>Trabajo colaborativo</li>
+          <li>Orientación al usuario</li>
+        </ul>
+        <h3 class="cv-section-title">🎓 Certificados</h3>
+        <div style="margin-top: 15px;">
+          <a href="#" class="btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Ver Certificados</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATRIZ DE RESPONSABILIDAD -->
+  <section class="enfoque-section" id="matriz" style="background: var(--gris-oscuro); padding-top: 80px; padding-bottom: 100px;">
+    <div class="section-header">
+      <span class="section-tag">Organización</span>
+      <h2 class="section-title">Matriz de <span>Responsabilidad</span></h2>
+      <p class="section-desc">Distribución de roles y funciones en el equipo de desarrollo.</p>
+    </div>
+    <div style="text-align: center; margin-bottom: 30px;">
+      <button id="btn-toggle-matriz" class="btn-primary" onclick="showMatriz()" style="padding: 12px 30px; font-size: 1rem;">Ver Matriz de Responsabilidad</button>
+    </div>
+
+    <div id="matriz-container" class="matriz-container" style="display: none;">
+      <table class="raci-table">
+        <thead>
+          <tr>
+            <th rowspan="2" style="background-color: #222;">TAREAS</th>
+            <th colspan="4" style="background-color: #111;">ROLES</th>
+          </tr>
+          <tr>
+            <th>Kelvin A. (Líder)</th>
+            <th>Campusano A. (FullStack)</th>
+            <th>Añorga P. (QA)</th>
+            <th>Castillo J. (Frontend)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tarea-col">1. Definición de Requerimientos y Diseño Visual</td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">2. Estructura HTML Principal (index.html)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="raci-a">✓</td>
+          </tr>
+          <tr>
+            <td class="tarea-col">3. Diseño CSS Global y Paleta de Colores</td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">4. Implementación del Navbar y menú</td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">5. Desarrollo de la sección Hero e Inicio</td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">6. Creación de la vista de Productos y Menú</td>
+            <td></td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">7. Implementación de los filtros interactivos</td>
+            <td></td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">8. Estructuración de la página Nosotros y C.V.</td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">9. Creación del Mapa Organizacional (SVG)</td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">10. Diseño e integración del Footer</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="raci-a">✓</td>
+          </tr>
+          <tr>
+            <td class="tarea-col">11. Diseño responsive en dispositivos móviles</td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="tarea-col">12. Pruebas de Calidad (QA) y Accesibilidad</td>
+            <td></td>
+            <td></td>
+            <td class="raci-a">✓</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- LEYENDA SIMPLE -->
+      <div class="raci-legend">
+        <div class="legend-item"><span class="legend-box raci-a">✓</span> Encargado de la tarea</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <!-- Mismo footer que productos e index -->
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+
+      <!-- Columna 1: Marca + Redes Sociales -->
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="SpeedBurger Logo" class="footer-logo-img" />
+        <p>
+          El sabor que te mueve. Fast food de primera calidad,
+          hecho con ingredientes frescos y mucho amor. ¡Visítanos hoy!
+        </p>
+        <div class="redes-title">Síguenos</div>
+        <div class="redes-sociales">
+          <a href="#" class="red-social" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a href="#" class="red-social" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 320 512" width="20" height="20" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Navegación -->
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">🏠 Inicio</a></li>
+          <li><a href="productos.html">🍔 Productos</a></li>
+          <li><a href="nosotros.html">👥 Nosotros</a></li>
+          <li><a href="contacto.html">📞 Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Correos / Contacto -->
+      <div class="footer-col">
+        <h4>Contáctanos</h4>
+        <a href="mailto:info@SpeedBurger.com" class="footer-correo" id="correo-info">
+          📧 info@SpeedBurger.com
+        </a>
+        <a href="mailto:pedidos@SpeedBurger.com" class="footer-correo" id="correo-pedidos">
+          📦 pedidos@SpeedBurger.com
+        </a>
+        <a href="tel:+51936726266" class="footer-correo" id="tel-principal">
+          📱 +51 936 726 266
+        </a>
+        <a href="#" class="footer-correo">
+          📍 Av. Principal 123, Lima
+        </a>
+      </div>
+
+      <!-- Columna 4: Empresas Aliadas -->
+      <div class="footer-col">
+        <h4>Empresas Aliadas</h4>
+        <div class="aliadas-grid">
+          <a href="https://www.rappi.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-rappi">🛵 Rappi</a>
+          <a href="https://www.pedidosya.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-pedidos">🥡 PedidosYa</a>
+          <a href="https://glovoapp.com/" target="_blank" rel="noopener noreferrer" class="aliada-badge" id="aliada-glovo">⚡ Glovo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 <span>SpeedBurger</span>. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para los amantes del fast food</p>
+    </div>
+  </footer>
+
+  <!-- Botón Subir al Top -->
+  <a href="#" class="btn-top" id="btnTop" title="Subir al inicio">▲</a>
+
+  <!-- Script básico para navbar scroll y menú hamburguesa -->
+  <script>
+     window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      const btnTop = document.getElementById('btnTop');
+      
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(17, 17, 17, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+      }
+
+      if (window.scrollY > 400) {
+        btnTop.classList.add('show');
+      } else {
+        btnTop.classList.remove('show');
+      }
+    });
+
+    // Lógica del menú hamburguesa
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarLinks = document.getElementById('navbar-links');
+
+    if (menuToggle && navbarLinks) {
+      menuToggle.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active');
+        if (navbarLinks.classList.contains('active')) {
+          menuToggle.textContent = '✕';
+        } else {
+          menuToggle.textContent = '☰';
+        }
+      });
+    }
+
+    // Lógica para mostrar los CVs
+    function showCV(id) {
+      // Ocultar todos los CVs
+      const allCvs = document.querySelectorAll('.cv-card');
+      allCvs.forEach(cv => cv.classList.add('hidden'));
+
+      // Mostrar el seleccionado
+      const selected = document.getElementById(id);
+      if (selected) {
+        selected.classList.remove('hidden');
+        // Scroll suave hacia el CV para una mejor experiencia
+        setTimeout(() => {
+          selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+
+    // Lógica para mostrar el Mapa Organizacional
+    function showMapa() {
+      const mapa = document.getElementById('mapa-container');
+      const btn = document.getElementById('btn-toggle-mapa');
+      
+      if (mapa.style.display === 'none') {
+        mapa.style.display = 'block';
+        btn.textContent = 'Ocultar Mapa Organizacional';
+        setTimeout(() => {
+          mapa.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      } else {
+        mapa.style.display = 'none';
+        btn.textContent = 'Ver Mapa Organizacional';
+      }
+    }
+
+    // Lógica para mostrar la Matriz de Responsabilidad
+    function showMatriz() {
+      const matriz = document.getElementById('matriz-container');
+      const btn = document.getElementById('btn-toggle-matriz');
+      
+      if (matriz.style.display === 'none') {
+        matriz.style.display = 'block';
+        btn.textContent = 'Ocultar Matriz de Responsabilidad';
+        setTimeout(() => {
+          matriz.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      } else {
+        matriz.style.display = 'none';
+        btn.textContent = 'Ver Matriz de Responsabilidad';
+      }
+    }
+  </script>
+
+</body>
+</html>

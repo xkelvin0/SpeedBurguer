@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580">
+  <defs>
+    <style>
+      .bg { fill: #1a1a1a; }
+      .box { fill: #1e1e1e; rx: 12; ry: 12; stroke: #D90429; stroke-width: 3; }
+      .text-name { font-family: 'Oswald', 'Arial', sans-serif; font-size: 18px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .text-role { font-family: 'Arial', sans-serif; font-size: 15px; font-weight: bold; fill: #FFBE00; text-anchor: middle; }
+      .text-desc { font-family: 'Arial', sans-serif; font-size: 13px; fill: #cccccc; text-anchor: middle; }
+      .line { stroke: #D90429; stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1000" height="580" rx="20" ry="20"/>
+
+  <!-- Líder -->
+  <rect class="box" x="350" y="40" width="300" height="150" />
+  <text class="text-name" x="500" y="75">Kelvin Jesus Acevedo Huarachi</text>
+  <text class="text-role" x="500" y="100">Líder del Proyecto</text>
+  <text class="text-desc" x="500" y="130">• Supervisor General del Código</text>
+  <text class="text-desc" x="500" y="150">• Diseño Contenedores (Hero/Inicio)</text>
+  <text class="text-desc" x="500" y="170">• Estructura Principal HTML/CSS</text>
+
+  <!-- Linea Vertical Central -->
+  <path class="line" d="M500 190 L500 250" />
+  <!-- Linea Horizontal Distribución -->
+  <path class="line" d="M166 250 L833 250" />
+
+  <!-- Conectores hacia abajo -->
+  <path class="line" d="M166 250 L166 300" />
+  <path class="line" d="M500 250 L500 300" />
+  <path class="line" d="M833 250 L833 300" />
+
+  <!-- Desarrollador 1 (Juan) -->
+  <rect class="box" x="16" y="300" width="300" height="150" />
+  <text class="text-name" x="166" y="335">Castillo Sullón Juan Pablo</text>
+  <text class="text-role" x="166" y="360">Desarrollador Frontend</text>
+  <text class="text-desc" x="166" y="390">• Creación y Diseño del Footer</text>
+  <text class="text-desc" x="166" y="410">• Enlaces de Redes Sociales</text>
+  <text class="text-desc" x="166" y="430">• Componentes Globales e Iconos</text>
+
+  <!-- Desarrollador 2 (Angel) -->
+  <rect class="box" x="350" y="300" width="300" height="150" />
+  <text class="text-name" x="500" y="335">Campusano Solis Angel Leonel</text>
+  <text class="text-role" x="500" y="360">Desarrollador Fullstack</text>
+  <text class="text-desc" x="500" y="390">• Desarrollo e iteración del Navbar</text>
+  <text class="text-desc" x="500" y="410">• Efectos de Scroll y Responsividad</text>
+  <text class="text-desc" x="500" y="430">• Sección Nosotros y Perfiles (CVs)</text>
+
+  <!-- Desarrollador 3 (Paolo) -->
+  <rect class="box" x="683" y="300" width="300" height="150" />
+  <text class="text-name" x="833" y="335">Añorga Pinedo Paolo Alexander</text>
+  <text class="text-role" x="833" y="360">Desarrollador y QA</text>
+  <text class="text-desc" x="833" y="390">• Menú de Categorías de Productos</text>
+  <text class="text-desc" x="833" y="410">• Sistema Interactivo de Filtros</text>
+  <text class="text-desc" x="833" y="430">• Pruebas y Aseguramiento (QA)</text>
+
+</svg>
