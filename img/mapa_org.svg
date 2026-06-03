@@ -50,9 +50,9 @@
   <!-- Desarrollador 3 (Paolo) -->
   <rect class="box" x="683" y="300" width="300" height="150" />
   <text class="text-name" x="833" y="335">Añorga Pinedo Paolo Alexander</text>
-  <text class="text-role" x="833" y="360">Desarrollador y QA</text>
+  <text class="text-role" x="833" y="360">Desarrollador y Diseñador</text>
   <text class="text-desc" x="833" y="390">• Menú de Categorías de Productos</text>
   <text class="text-desc" x="833" y="410">• Sistema Interactivo de Filtros</text>
-  <text class="text-desc" x="833" y="430">• Pruebas y Aseguramiento (QA)</text>
+  <text class="text-desc" x="833" y="430">• Creación del Wireframe</text>
 
 </svg>
