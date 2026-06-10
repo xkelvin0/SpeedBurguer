@@ -1471,3 +1471,102 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   MISIÓN Y VISIÓN - Tarjetas
+   ============================================ */
+
+.mv-section {
+  background: #111;
+  padding: 80px 20px;
+}
+
+.mv-header {
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.mv-header .section-tag {
+  background: var(--rojo);
+  color: #fff;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.mv-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  color: var(--blanco);
+  margin-top: 15px;
+}
+
+.mv-header h2 span {
+  color: var(--rojo);
+}
+
+.mv-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.mv-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mv-card.mision {
+  border: 2px solid #f0c040;
+}
+
+.mv-card.vision {
+  border: 2px solid var(--rojo);
+}
+
+.mv-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+}
+
+.mv-card.mision h3 {
+  color: #f0c040;
+}
+
+.mv-card.vision h3 {
+  color: var(--rojo);
+}
+
+.mv-card p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.mv-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .mv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mv-header h2 {
+    font-size: 1.8rem;
+  }
+}
+
