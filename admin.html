@@ -61,11 +61,18 @@
     }
 
     /* ===== STATS ===== */
+    .stats-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 12px;
+      margin-top: 10px;
+    }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     .stat-card {
       background: #1a1a1a;
@@ -400,13 +407,39 @@
   <!-- MAIN -->
   <div class="admin-main">
 
-    <!-- STATS -->
+    <!-- STATS VENTAS -->
+    <div class="stats-title">📈 Resumen de Ventas</div>
     <div class="stats-grid">
       <div class="stat-card">
         <span class="stat-icon">👥</span>
         <div class="stat-num" id="stat-clientes">0</div>
-        <div class="stat-label">Cantidad Clientes</div>
+        <div class="stat-label">Pedidos Totales</div>
       </div>
+      <div class="stat-card">
+        <span class="stat-icon">💵</span>
+        <div class="stat-num" id="stat-ingresos">S/. 0</div>
+        <div class="stat-label">Ingresos Totales</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🛵</span>
+        <div class="stat-num" id="stat-delivery">0</div>
+        <div class="stat-label">Pedidos Delivery</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🏪</span>
+        <div class="stat-num" id="stat-recojo">0</div>
+        <div class="stat-label">Recojo en Tienda</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📉</span>
+        <div class="stat-num" id="stat-ticket">S/. 0</div>
+        <div class="stat-label">Ticket Promedio</div>
+      </div>
+    </div>
+
+    <!-- STATS INVENTARIO -->
+    <div class="stats-title">📋 Resumen de Menú</div>
+    <div class="stats-grid">
       <div class="stat-card">
         <span class="stat-icon">📦</span>
         <div class="stat-num" id="stat-total">0</div>
@@ -418,14 +451,19 @@
         <div class="stat-label">Hamburguesas</div>
       </div>
       <div class="stat-card">
+        <span class="stat-icon">🍗</span>
+        <div class="stat-num" id="stat-broaster">0</div>
+        <div class="stat-label">Pollo Broaster</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🔥</span>
+        <div class="stat-num" id="stat-nuggets-alitas">0</div>
+        <div class="stat-label">Nuggets y Alitas</div>
+      </div>
+      <div class="stat-card">
         <span class="stat-icon">🥤</span>
         <div class="stat-num" id="stat-bebidas">0</div>
         <div class="stat-label">Bebidas</div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-icon">💰</span>
-        <div class="stat-num" id="stat-precio">S/. 0</div>
-        <div class="stat-label">Precio Promedio</div>
       </div>
     </div>
 
@@ -591,13 +629,38 @@
 
     // ===== ESTADÍSTICAS =====
     function actualizarStats(lista) {
+      // 1. Ventas Dinámicas
       const pedidos = JSON.parse(localStorage.getItem('sb_admin_pedidos')) || [];
-      document.getElementById('stat-clientes').textContent = pedidos.length;
+      const totalPedidos = pedidos.length;
+      
+      let ingresos = 0;
+      let delivery = 0;
+      let recojo = 0;
+
+      pedidos.forEach(p => {
+        if (p.tipoEntrega === 'delivery') delivery++;
+        else recojo++;
+
+        // Sumar ingresos (precio * cantidad del item + costo de delivery opcional)
+        let subtotal = p.items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        if (p.tipoEntrega === 'delivery') subtotal += 5.00; // Agregar costo de delivery al ingreso
+        ingresos += subtotal;
+      });
+
+      const ticketPromedio = totalPedidos > 0 ? (ingresos / totalPedidos) : 0;
+
+      document.getElementById('stat-clientes').textContent = totalPedidos;
+      document.getElementById('stat-ingresos').textContent = `S/. ${ingresos.toFixed(0)}`;
+      document.getElementById('stat-delivery').textContent = delivery;
+      document.getElementById('stat-recojo').textContent = recojo;
+      document.getElementById('stat-ticket').textContent = `S/. ${ticketPromedio.toFixed(0)}`;
+
+      // 2. Inventario Menú
       document.getElementById('stat-total').textContent = lista.length;
       document.getElementById('stat-hamburguesas').textContent = lista.filter(p => p.categoria === 'Hamburguesas').length;
+      document.getElementById('stat-broaster').textContent = lista.filter(p => p.categoria === 'Pollo Broaster').length;
+      document.getElementById('stat-nuggets-alitas').textContent = lista.filter(p => p.categoria === 'Nuggets' || p.categoria === 'Alitas').length;
       document.getElementById('stat-bebidas').textContent = lista.filter(p => p.categoria === 'Bebidas').length;
-      const prom = lista.length > 0 ? lista.reduce((s, p) => s + p.precio, 0) / lista.length : 0;
-      document.getElementById('stat-precio').textContent = `S/. ${prom.toFixed(0)}`;
     }
 
     // ===== RENDERIZAR TABLA =====
