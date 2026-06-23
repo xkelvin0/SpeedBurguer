@@ -210,7 +210,7 @@ function mostrarToast(nombre) {
 }
 
 // Renderizar todos los productos al cargar la página
-document.addEventListener(\"DOMContentLoaded\", () => {
+document.addEventListener("DOMContentLoaded", () => {
     renderizarProductos(inventario);
     actualizarContadorCarrito();
 });
