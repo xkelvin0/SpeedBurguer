@@ -148,10 +148,74 @@ botonesFiltro.forEach(boton => {
 // Dummy function para el carrito (Solo UI)
 function agregarAlCarrito(id) {
     const producto = inventario.find(p => p.id === id);
-    alert(`¡${producto.nombre} agregado a tu pedido! ¿Deseas agregar otro?`);
+    
+    // Leer carrito actual del localStorage
+    let carrito = JSON.parse(localStorage.getItem('speedburger_carrito')) || [];
+    
+    // Verificar si el producto ya está en el carrito
+    const existente = carrito.find(item => item.id === id);
+    
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        carrito.push({
+            id: producto.id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            imagen: producto.imagen,
+            categoria: producto.categoria,
+            cantidad: 1
+        });
+    }
+    
+    // Guardar en localStorage
+    localStorage.setItem('speedburger_carrito', JSON.stringify(carrito));
+    
+    // Actualizar contador del navbar
+    actualizarContadorCarrito();
+    
+    // Mostrar notificación visual
+    mostrarToast(producto.nombre);
+}
+
+// Actualizar el contador del ícono del carrito en el navbar
+function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('speedburger_carrito')) || [];
+    const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    const contador = document.getElementById('carrito-contador');
+    if (contador) {
+        contador.textContent = total;
+        contador.style.display = total > 0 ? 'flex' : 'none';
+    }
+}
+
+// Notificación toast al agregar producto
+function mostrarToast(nombre) {
+    // Eliminar toast anterior si existe
+    const toastExistente = document.getElementById('toast-carrito');
+    if (toastExistente) toastExistente.remove();
+    
+    const toast = document.createElement('div');
+    toast.id = 'toast-carrito';
+    toast.innerHTML = `🛒 <strong>${nombre}</strong> agregado al carrito`;
+    toast.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: #2ecc71; color: #fff; padding: 14px 24px; border-radius: 30px;
+        font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 9999;
+        animation: slideUpToast 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
 }
 
 // Renderizar todos los productos al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(\"DOMContentLoaded\", () => {
     renderizarProductos(inventario);
+    actualizarContadorCarrito();
 });
+
+// CSS para animación del toast
+const style = document.createElement('style');
+style.textContent = `@keyframes slideUpToast { from { opacity:0; transform: translateX(-50%) translateY(20px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }`;
+document.head.appendChild(style);
