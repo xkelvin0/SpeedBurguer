@@ -74,6 +74,12 @@
       gap: 15px;
       margin-bottom: 25px;
     }
+    .stats-grid-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
     .stat-card {
       background: #1a1a1a;
       border: 1px solid #2e2e2e;
@@ -439,7 +445,7 @@
 
     <!-- STATS INVENTARIO -->
     <div class="stats-title">📋 Resumen de Menú</div>
-    <div class="stats-grid">
+    <div class="stats-grid-6">
       <div class="stat-card">
         <span class="stat-icon">📦</span>
         <div class="stat-num" id="stat-total">0</div>
@@ -449,6 +455,11 @@
         <span class="stat-icon">🍔</span>
         <div class="stat-num" id="stat-hamburguesas">0</div>
         <div class="stat-label">Hamburguesas</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🍟</span>
+        <div class="stat-num" id="stat-salchipapas">0</div>
+        <div class="stat-label">Salchipapas</div>
       </div>
       <div class="stat-card">
         <span class="stat-icon">🍗</span>
@@ -658,6 +669,7 @@
       // 2. Inventario Menú
       document.getElementById('stat-total').textContent = lista.length;
       document.getElementById('stat-hamburguesas').textContent = lista.filter(p => p.categoria === 'Hamburguesas').length;
+      document.getElementById('stat-salchipapas').textContent = lista.filter(p => p.categoria === 'Salchipapas').length;
       document.getElementById('stat-broaster').textContent = lista.filter(p => p.categoria === 'Pollo Broaster').length;
       document.getElementById('stat-nuggets-alitas').textContent = lista.filter(p => p.categoria === 'Nuggets' || p.categoria === 'Alitas').length;
       document.getElementById('stat-bebidas').textContent = lista.filter(p => p.categoria === 'Bebidas').length;
