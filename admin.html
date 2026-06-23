@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpeedBurger | Panel Administrador</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { background: #0d0d0d; }
+
+    /* ===== TOPBAR ADMIN ===== */
+    .admin-topbar {
+      background: #1a1a1a;
+      border-bottom: 2px solid var(--rojo);
+      padding: 14px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-topbar-left { display: flex; align-items: center; gap: 14px; }
+    .admin-topbar-left img { width: 36px; }
+    .admin-topbar-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .admin-topbar-title span { color: var(--rojo); }
+    .badge-admin {
+      background: var(--rojo);
+      color: #fff;
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .btn-cerrar {
+      background: #2e2e2e;
+      border: 1px solid #444;
+      color: #ccc;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-cerrar:hover { background: var(--rojo); color: #fff; border-color: var(--rojo); }
+
+    /* ===== LAYOUT ===== */
+    .admin-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* ===== STATS ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-card .stat-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.2rem;
+      color: var(--amarillo);
+    }
+    .stat-card .stat-label { color: #777; font-size: 0.82rem; margin-top: 4px; }
+    .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+
+    /* ===== ACCIONES ===== */
+    .admin-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .btn-add {
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-add:hover { background: var(--rojo-oscuro); transform: translateY(-1px); }
+
+    .search-admin {
+      flex: 1;
+      min-width: 220px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 11px 15px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-admin:focus { border-color: var(--rojo); }
+
+    .filter-select {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 11px 15px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* ===== TABLA ===== */
+    .tabla-wrapper {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .tabla-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid #2e2e2e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tabla-header h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .tabla-count { color: #666; font-size: 0.83rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      background: #111;
+      color: #888;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px 18px;
+      text-align: left;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    tbody tr {
+      border-bottom: 1px solid #222;
+      transition: background 0.2s;
+    }
+    tbody tr:hover { background: #222; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td {
+      padding: 13px 18px;
+      color: #ccc;
+      font-size: 0.88rem;
+      vertical-align: middle;
+    }
+
+    .td-img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #222;
+    }
+    .td-nombre { font-weight: 600; color: #fff; }
+    .td-precio { color: var(--amarillo); font-family: 'Oswald', sans-serif; font-size: 1rem; }
+    .td-cat {
+      background: rgba(255,190,0,0.12);
+      color: var(--amarillo);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .td-id { color: #444; font-size: 0.78rem; }
+
+    .acciones-td { display: flex; gap: 8px; }
+    .btn-edit, .btn-del {
+      border: none;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-edit { background: rgba(255,190,0,0.15); color: var(--amarillo); border: 1px solid rgba(255,190,0,0.3); }
+    .btn-edit:hover { background: var(--amarillo); color: #000; }
+    .btn-del { background: rgba(217,4,41,0.15); color: var(--rojo); border: 1px solid rgba(217,4,41,0.3); }
+    .btn-del:hover { background: var(--rojo); color: #fff; }
+
+    .empty-tabla {
+      text-align: center;
+      padding: 50px;
+      color: #444;
+    }
+    .empty-tabla span { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+    /* ===== MODAL CRUD ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-crud {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 35px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-crud h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .modal-crud h3 span { color: var(--rojo); }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      color: #aaa;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--rojo); }
+    .form-group select option { background: #1a1a1a; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .modal-btns { display: flex; gap: 10px; margin-top: 22px; }
+    .btn-guardar {
+      flex: 1;
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 13px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-guardar:hover { background: var(--rojo-oscuro); }
+    .btn-cancelar {
+      flex: 1;
+      background: #2e2e2e;
+      color: #aaa;
+      border: none;
+      border-radius: 8px;
+      padding: 13px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-cancelar:hover { background: #3e3e3e; }
+
+    /* Toast notificación */
+    .admin-toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #2ecc71;
+      color: #fff;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      z-index: 9999;
+      animation: slideInRight 0.3s ease;
+      display: none;
+    }
+    .admin-toast.error { background: var(--rojo); }
+    .admin-toast.show { display: block; }
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .admin-topbar { padding: 12px 16px; }
+      .admin-main { padding: 20px 12px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <div class="admin-topbar">
+    <div class="admin-topbar-left">
+      <img src="img/logo.png" alt="Logo" />
+      <div>
+        <div class="admin-topbar-title">Speed<span>Burger</span></div>
+      </div>
+      <span class="badge-admin">ADMIN</span>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="index.html" style="color:#666; font-size:0.83rem; text-decoration:none;">← Ver sitio</a>
+      <button class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">📦</span>
+        <div class="stat-num" id="stat-total">0</div>
+        <div class="stat-label">Total Productos</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🍔</span>
+        <div class="stat-num" id="stat-hamburguesas">0</div>
+        <div class="stat-label">Hamburguesas</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🥤</span>
+        <div class="stat-num" id="stat-bebidas">0</div>
+        <div class="stat-label">Bebidas</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">💰</span>
+        <div class="stat-num" id="stat-precio">S/. 0</div>
+        <div class="stat-label">Precio Promedio</div>
+      </div>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="admin-actions">
+      <button class="btn-add" onclick="abrirModal()">➕ Añadir Producto</button>
+      <input type="text" id="search-input" class="search-admin" placeholder="🔍 Buscar por nombre o descripción..." oninput="buscarProducto()" />
+      <select class="filter-select" id="filter-cat" onchange="buscarProducto()">
+        <option value="">Todas las categorías</option>
+        <option value="Hamburguesas">Hamburguesas</option>
+        <option value="Nuggets">Nuggets</option>
+        <option value="Pollo Broaster">Pollo Broaster</option>
+        <option value="Salchipapas">Salchipapas</option>
+        <option value="Alitas">Alitas</option>
+        <option value="Bebidas">Bebidas</option>
+      </select>
+    </div>
+
+    <!-- TABLA -->
+    <div class="tabla-wrapper">
+      <div class="tabla-header">
+        <h3>📋 Inventario de Productos</h3>
+        <span class="tabla-count" id="tabla-count">0 productos</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-body">
+            <!-- Filas generadas por JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL AÑADIR / EDITAR -->
+  <div class="modal-overlay" id="modal-crud">
+    <div class="modal-crud">
+      <h3 id="modal-titulo">➕ Añadir <span>Producto</span></h3>
+      <form id="form-crud" onsubmit="guardarProducto(event)">
+        <input type="hidden" id="form-id" />
+        <div class="form-group">
+          <label>Nombre del Producto *</label>
+          <input type="text" id="form-nombre" placeholder="Ej: Monster Burger" required />
+        </div>
+        <div class="form-group">
+          <label>Descripción *</label>
+          <textarea id="form-desc" placeholder="Describe los ingredientes y características..." required></textarea>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Precio (S/.) *</label>
+            <input type="number" id="form-precio" placeholder="0.00" step="0.50" min="1" required />
+          </div>
+          <div class="form-group">
+            <label>Categoría *</label>
+            <select id="form-cat" required>
+              <option value="" disabled selected>Selecciona</option>
+              <option value="Hamburguesas">Hamburguesas</option>
+              <option value="Nuggets">Nuggets</option>
+              <option value="Pollo Broaster">Pollo Broaster</option>
+              <option value="Salchipapas">Salchipapas</option>
+              <option value="Alitas">Alitas</option>
+              <option value="Bebidas">Bebidas</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ruta de imagen (img/nombre.png)</label>
+          <input type="text" id="form-img" placeholder="img/nombre_producto.png" />
+        </div>
+        <div class="modal-btns">
+          <button type="submit" class="btn-guardar" id="btn-guardar">💾 GUARDAR</button>
+          <button type="button" class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="admin-toast" id="admin-toast"></div>
+
+  <script>
+    // ===== VERIFICAR AUTENTICACIÓN =====
+    if (sessionStorage.getItem('sb_admin_auth') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // ===== DATOS BASE (los mismos de productos.js) =====
+    const PRODUCTOS_BASE = [
+      { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
+      { id: 2, nombre: "Doble Queso", descripcion: "Doble carne de res, cuádruple queso cheddar y tocino.", precio: 24.50, categoria: "Hamburguesas", imagen: "img/doble_queso.png" },
+      { id: 3, nombre: "Bacon BBQ", descripcion: "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", precio: 22.00, categoria: "Hamburguesas", imagen: "img/bacon_bbq.png" },
+      { id: 4, nombre: "Spicy Volcano", descripcion: "Carne 200g, jalapeños, queso pepper jack y salsa picante.", precio: 21.50, categoria: "Hamburguesas", imagen: "img/spicy_volcano.png" },
+      { id: 5, nombre: "Crispy Chicken Burger", descripcion: "Pechuga de pollo crujiente, lechuga y mayonesa.", precio: 19.90, categoria: "Hamburguesas", imagen: "img/chicken_burger.png" },
+      { id: 6, nombre: "Veggie Style", descripcion: "Hamburguesa de lentejas, palta, tomate y lechuga fresca.", precio: 17.00, categoria: "Hamburguesas", imagen: "img/veggie_burger.png" },
+      { id: 7, nombre: "Monster Triple", descripcion: "Triple carne, huevo frito, platano, queso y tocino.", precio: 28.90, categoria: "Hamburguesas", imagen: "img/monster_triple.png" },
+      { id: 8, nombre: "Nuggets con salsa BBQ", descripcion: "Porción de nuggets crujientes con papas fritas y salsa BBQ.", precio: 12.90, categoria: "Nuggets", imagen: "img/nuggets_bbq.png" },
+      { id: 9, nombre: "Nuggets con salsa Acevichada", descripcion: "Porción de nuggets crujientes con papas fritas y salsa acevichada casera.", precio: 13.90, categoria: "Nuggets", imagen: "img/nuggets_acevichada.png" },
+      { id: 10, nombre: "Pierna Broaster", descripcion: "1 jugosa pierna de pollo broaster con ensalada y papas.", precio: 10.00, categoria: "Pollo Broaster", imagen: "img/pierna_broaster.png" },
+      { id: 11, nombre: "Pecho Broaster", descripcion: "1 gran pieza de pecho broaster crujiente con ensalada y papas.", precio: 12.00, categoria: "Pollo Broaster", imagen: "img/pecho_broaster.png" },
+      { id: 12, nombre: "Entrepierna Broaster", descripcion: "1 jugosa pieza de entrepierna broaster con ensalada y papas.", precio: 11.00, categoria: "Pollo Broaster", imagen: "img/entrepierna_broaster.png" },
+      { id: 13, nombre: "Alita Broaster", descripcion: "1 pieza de alita broaster con ensalada y papas.", precio: 9.50, categoria: "Pollo Broaster", imagen: "img/alita_broaster.png" },
+      { id: 14, nombre: "SalchiClásica", descripcion: "Papas fritas y hot dog frankfurt con cremas.", precio: 10.00, categoria: "Salchipapas", imagen: "img/salchiclasica.png" },
+      { id: 15, nombre: "SalchiEspecial", descripcion: "Papas, hot dog, huevo frito y queso derretido.", precio: 16.50, categoria: "Salchipapas", imagen: "img/salchiespecial.png" },
+      { id: 16, nombre: "SalchiPechuga", descripcion: "Papas fritas, hotdog y trozos de pechuga broaster.", precio: 15.00, categoria: "Salchipapas", imagen: "img/salchipechuga.png" },
+      { id: 17, nombre: "SalchiCarne", descripcion: "Papas fritas, hotdog, carne picada y chorizo.", precio: 18.00, categoria: "Salchipapas", imagen: "img/salchicarne.png" },
+      { id: 18, nombre: "SalchiMonster", descripcion: "Papas, hot dog, pollo, carne, huevo, chorizo y tocino.", precio: 25.00, categoria: "Salchipapas", imagen: "img/salchimonster.png" },
+      { id: 19, nombre: "Alitas BBQ (6 und)", descripcion: "6 alitas bañadas en nuestra salsa BBQ casera.", precio: 16.00, categoria: "Alitas", imagen: "img/alitas.png" },
+      { id: 20, nombre: "Alitas Buffalo (6 und)", descripcion: "6 alitas con salsa buffalo picante y dip de blue cheese.", precio: 17.50, categoria: "Alitas", imagen: "img/alitas_buffalo_papas.png" },
+      { id: 21, nombre: "Alitas Teriyaki (6 und)", descripcion: "6 alitas dulces con salsa teriyaki y semillas de sésamo.", precio: 18.00, categoria: "Alitas", imagen: "img/alitas_teriyaki_papas.png" },
+      { id: 22, nombre: "Alitas acevichadas (6 und)", descripcion: "6 alitas bañadas en nuestra salsa acevichada casera.", precio: 18.00, categoria: "Alitas", imagen: "img/alitas_acevichada_papas.png" },
+      { id: 23, nombre: "Inca Kola 600ml", descripcion: "Gaseosa helada Inca Kola personal.", precio: 4.00, categoria: "Bebidas", imagen: "img/inca_kola_botella.png" },
+      { id: 24, nombre: "Coca Cola 600ml", descripcion: "Gaseosa helada Coca Cola personal.", precio: 4.00, categoria: "Bebidas", imagen: "img/coca_cola_botella.png" },
+      { id: 25, nombre: "Chicha Morada 1L", descripcion: "Jarra de chicha morada natural y helada.", precio: 10.00, categoria: "Bebidas", imagen: "img/chicha_morada.png" },
+      { id: 26, nombre: "Mojito Clásico", descripcion: "Trago refrescante con ron, menta, limón y soda.", precio: 15.00, categoria: "Bebidas", imagen: "img/mojito.png" },
+      { id: 27, nombre: "Mojito Maracuyá", descripcion: "Variante tropical del mojito con pulpa de maracuyá.", precio: 16.00, categoria: "Bebidas", imagen: "img/mojito_maracuya.png" },
+      { id: 28, nombre: "Pisco Sour", descripcion: "Coctel bandera peruano, preparado al instante.", precio: 18.00, categoria: "Bebidas", imagen: "img/pisco_sour.png" },
+      { id: 29, nombre: "Cuba Libre", descripcion: "Clásico trago con ron, Coca Cola y un toque de limón.", precio: 14.00, categoria: "Bebidas", imagen: "img/cuba_libre.png" },
+      { id: 30, nombre: "Limonada Frozen", descripcion: "Refrescante limonada batida con hielo granizado.", precio: 6.50, categoria: "Bebidas", imagen: "img/limonada_frozen.png" }
+    ];
+
+    // ===== CRUD - FUNCIONES DE DATOS =====
+
+    function obtenerProductos() {
+      const guardados = localStorage.getItem('sb_admin_productos');
+      if (guardados) return JSON.parse(guardados);
+      // Primera vez: inicializar con los productos base
+      localStorage.setItem('sb_admin_productos', JSON.stringify(PRODUCTOS_BASE));
+      return PRODUCTOS_BASE;
+    }
+
+    function guardarProductos(lista) {
+      localStorage.setItem('sb_admin_productos', JSON.stringify(lista));
+    }
+
+    function generarId(lista) {
+      return lista.length === 0 ? 1 : Math.max(...lista.map(p => p.id)) + 1;
+    }
+
+    // ===== ESTADÍSTICAS =====
+    function actualizarStats(lista) {
+      document.getElementById('stat-total').textContent = lista.length;
+      document.getElementById('stat-hamburguesas').textContent = lista.filter(p => p.categoria === 'Hamburguesas').length;
+      document.getElementById('stat-bebidas').textContent = lista.filter(p => p.categoria === 'Bebidas').length;
+      const prom = lista.length > 0 ? lista.reduce((s, p) => s + p.precio, 0) / lista.length : 0;
+      document.getElementById('stat-precio').textContent = `S/. ${prom.toFixed(0)}`;
+    }
+
+    // ===== RENDERIZAR TABLA =====
+    function renderTabla(lista) {
+      const tbody = document.getElementById('tabla-body');
+      document.getElementById('tabla-count').textContent = `${lista.length} producto${lista.length !== 1 ? 's' : ''}`;
+
+      if (lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7"><div class="empty-tabla"><span>🔍</span>No se encontraron productos</div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = lista.map(p => `
+        <tr id="row-${p.id}">
+          <td><span class="td-id">#${p.id}</span></td>
+          <td><img src="${p.imagen}" alt="${p.nombre}" class="td-img" onerror="this.src='img/logo.png'" /></td>
+          <td><span class="td-nombre">${p.nombre}</span></td>
+          <td style="max-width:220px; color:#888; font-size:0.82rem;">${p.descripcion}</td>
+          <td><span class="td-cat">${p.categoria}</span></td>
+          <td><span class="td-precio">S/. ${p.precio.toFixed(2)}</span></td>
+          <td>
+            <div class="acciones-td">
+              <button class="btn-edit" onclick="editarProducto(${p.id})">✏️ Editar</button>
+              <button class="btn-del" onclick="eliminarProducto(${p.id})">🗑️ Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // ===== BUSCAR =====
+    function buscarProducto() {
+      const texto = document.getElementById('search-input').value.toLowerCase();
+      const cat = document.getElementById('filter-cat').value;
+      let lista = obtenerProductos();
+
+      if (texto) {
+        lista = lista.filter(p =>
+          p.nombre.toLowerCase().includes(texto) ||
+          p.descripcion.toLowerCase().includes(texto)
+        );
+      }
+      if (cat) {
+        lista = lista.filter(p => p.categoria === cat);
+      }
+
+      renderTabla(lista);
+    }
+
+    // ===== MODAL =====
+    let modoEdicion = false;
+
+    function abrirModal(producto = null) {
+      modoEdicion = !!producto;
+      document.getElementById('modal-titulo').innerHTML = producto
+        ? '✏️ Editar <span>Producto</span>'
+        : '➕ Añadir <span>Producto</span>';
+      document.getElementById('btn-guardar').textContent = producto ? '💾 ACTUALIZAR' : '💾 GUARDAR';
+
+      // Limpiar / llenar formulario
+      document.getElementById('form-id').value = producto ? producto.id : '';
+      document.getElementById('form-nombre').value = producto ? producto.nombre : '';
+      document.getElementById('form-desc').value = producto ? producto.descripcion : '';
+      document.getElementById('form-precio').value = producto ? producto.precio : '';
+      document.getElementById('form-cat').value = producto ? producto.categoria : '';
+      document.getElementById('form-img').value = producto ? producto.imagen : '';
+
+      document.getElementById('modal-crud').classList.add('active');
+      document.getElementById('form-nombre').focus();
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-crud').classList.remove('active');
+      document.getElementById('form-crud').reset();
+    }
+
+    // Cerrar modal al hacer clic fuera
+    document.getElementById('modal-crud').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+
+    // ===== GUARDAR (Añadir o Editar) =====
+    function guardarProducto(e) {
+      e.preventDefault();
+      let lista = obtenerProductos();
+
+      const id = document.getElementById('form-id').value;
+      const nombre = document.getElementById('form-nombre').value.trim();
+      const descripcion = document.getElementById('form-desc').value.trim();
+      const precio = parseFloat(document.getElementById('form-precio').value);
+      const categoria = document.getElementById('form-cat').value;
+      const imagen = document.getElementById('form-img').value.trim() || 'img/logo.png';
+
+      if (modoEdicion && id) {
+        // MODIFICAR producto existente
+        const idx = lista.findIndex(p => p.id === parseInt(id));
+        if (idx !== -1) {
+          lista[idx] = { id: parseInt(id), nombre, descripcion, precio, categoria, imagen };
+          mostrarToast('✅ Producto actualizado correctamente');
+        }
+      } else {
+        // AÑADIR nuevo producto
+        const nuevoId = generarId(lista);
+        lista.push({ id: nuevoId, nombre, descripcion, precio, categoria, imagen });
+        mostrarToast('✅ Producto añadido correctamente');
+      }
+
+      guardarProductos(lista);
+      cerrarModal();
+      inicializar();
+    }
+
+    // ===== EDITAR =====
+    function editarProducto(id) {
+      const lista = obtenerProductos();
+      const producto = lista.find(p => p.id === id);
+      if (producto) abrirModal(producto);
+    }
+
+    // ===== ELIMINAR =====
+    function eliminarProducto(id) {
+      const lista = obtenerProductos();
+      const producto = lista.find(p => p.id === id);
+      if (!producto) return;
+
+      if (confirm(`¿Eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`)) {
+        const nuevaLista = lista.filter(p => p.id !== id);
+        guardarProductos(nuevaLista);
+        mostrarToast('🗑️ Producto eliminado', true);
+        inicializar();
+      }
+    }
+
+    // ===== TOAST =====
+    function mostrarToast(msg, esError = false) {
+      const toast = document.getElementById('admin-toast');
+      toast.textContent = msg;
+      toast.className = 'admin-toast show' + (esError ? ' error' : '');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ===== CERRAR SESIÓN =====
+    function cerrarSesion() {
+      sessionStorage.removeItem('sb_admin_auth');
+      window.location.href = 'login.html';
+    }
+
+    // ===== INICIALIZAR =====
+    function inicializar() {
+      const lista = obtenerProductos();
+      actualizarStats(lista);
+      renderTabla(lista);
+      // Limpiar búsqueda
+      document.getElementById('search-input').value = '';
+      document.getElementById('filter-cat').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', inicializar);
+  </script>
+
+</body>
+</html>
