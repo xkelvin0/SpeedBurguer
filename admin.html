@@ -591,10 +591,8 @@
 
     // ===== ESTADÍSTICAS =====
     function actualizarStats(lista) {
-      // LLENAR AQUÍ TUS DATOS MANUALE PARA CLIENTES
-      const CANTIDAD_CLIENTES_MANUAL = 150; 
-      
-      document.getElementById('stat-clientes').textContent = CANTIDAD_CLIENTES_MANUAL;
+      const pedidos = JSON.parse(localStorage.getItem('sb_admin_pedidos')) || [];
+      document.getElementById('stat-clientes').textContent = pedidos.length;
       document.getElementById('stat-total').textContent = lista.length;
       document.getElementById('stat-hamburguesas').textContent = lista.filter(p => p.categoria === 'Hamburguesas').length;
       document.getElementById('stat-bebidas').textContent = lista.filter(p => p.categoria === 'Bebidas').length;
@@ -756,11 +754,23 @@
 
     // ===== INICIALIZAR GRÁFICOS CHART.JS =====
     function inicializarGraficos() {
+      const pedidos = JSON.parse(localStorage.getItem('sb_admin_pedidos')) || [];
+
       // -------------------------------------------------------------
-      // DATOS MANUALES PARA GRÁFICO DE BARRAS (MÁS VENDIDOS)
+      // DATOS DINÁMICOS PARA GRÁFICO DE BARRAS (MÁS VENDIDOS)
       // -------------------------------------------------------------
-      const etiquetasBarras = ['Clásica Burger', 'Doble Queso', 'SalchiMonster', 'Pisco Sour', 'Alitas BBQ']; // Cambia los nombres aquí
-      const datosBarras = [120, 95, 80, 60, 45]; // Cambia las cantidades aquí
+      const ventasPorProducto = {};
+      pedidos.forEach(pedido => {
+        pedido.items.forEach(item => {
+          if (!ventasPorProducto[item.nombre]) ventasPorProducto[item.nombre] = 0;
+          ventasPorProducto[item.nombre] += item.cantidad;
+        });
+      });
+      // Ordenar y obtener los 5 principales
+      const top5 = Object.entries(ventasPorProducto).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      
+      const etiquetasBarras = top5.length > 0 ? top5.map(t => t[0]) : ['Sin ventas aún'];
+      const datosBarras = top5.length > 0 ? top5.map(t => t[1]) : [0];
 
       const ctxBar = document.getElementById('barChart').getContext('2d');
       new Chart(ctxBar, {
@@ -770,7 +780,7 @@
           datasets: [{
             label: 'Unidades Vendidas',
             data: datosBarras,
-            backgroundColor: 'rgba(217, 4, 41, 0.7)', // Color Rojo
+            backgroundColor: 'rgba(217, 4, 41, 0.7)',
             borderColor: '#d90429',
             borderWidth: 1,
             borderRadius: 6
@@ -780,17 +790,28 @@
           responsive: true,
           plugins: { legend: { display: false } },
           scales: {
-            y: { beginAtZero: true, grid: { color: '#333' }, ticks: { color: '#aaa' } },
+            y: { beginAtZero: true, grid: { color: '#333' }, ticks: { color: '#aaa', stepSize: 1 } },
             x: { grid: { display: false }, ticks: { color: '#aaa' } }
           }
         }
       });
 
       // -------------------------------------------------------------
-      // DATOS MANUALES PARA GRÁFICO CIRCULAR (CATEGORÍAS)
+      // DATOS DINÁMICOS PARA GRÁFICO CIRCULAR (CATEGORÍAS)
       // -------------------------------------------------------------
-      const etiquetasCircular = ['Hamburguesas', 'Salchipapas', 'Bebidas', 'Nuggets/Alitas']; // Cambia las categorías aquí
-      const datosCircular = [40, 25, 20, 15]; // Cambia los porcentajes o cantidades aquí
+      const ventasPorCategoria = {};
+      pedidos.forEach(pedido => {
+        pedido.items.forEach(item => {
+          if (!ventasPorCategoria[item.categoria]) ventasPorCategoria[item.categoria] = 0;
+          ventasPorCategoria[item.categoria] += item.cantidad;
+        });
+      });
+
+      const categorias = Object.keys(ventasPorCategoria);
+      const datosCats = Object.values(ventasPorCategoria);
+
+      const etiquetasCircular = categorias.length > 0 ? categorias : ['Sin ventas'];
+      const datosCircular = categorias.length > 0 ? datosCats : [1];
 
       const ctxPie = document.getElementById('pieChart').getContext('2d');
       new Chart(ctxPie, {
@@ -799,12 +820,7 @@
           labels: etiquetasCircular,
           datasets: [{
             data: datosCircular,
-            backgroundColor: [
-              '#d90429', // Rojo
-              '#ffbe00', // Amarillo
-              '#2e86ab', // Azul
-              '#f4a261'  // Naranja
-            ],
+            backgroundColor: ['#d90429', '#ffbe00', '#2e86ab', '#f4a261', '#2ecc71', '#9b59b6'],
             borderWidth: 0
           }]
         },

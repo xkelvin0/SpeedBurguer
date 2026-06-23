@@ -580,6 +580,15 @@
         ? 'Tu pedido ha sido recibido. Estamos preparando tu comida con mucho sabor.<br/><strong>🛵 Tiempo estimado de entrega: 10-20 min</strong>'
         : 'Tu pedido ha sido recibido. Pasa a recogerlo a nuestra tienda.<br/><strong>🏪 Av. Principal 123, Surquillo — Listo en 10-15 min</strong>';
       document.querySelector('.modal-box p').innerHTML = msg;
+      // Guardar en historial de pedidos para el Admin
+      const pedidosGuardados = JSON.parse(localStorage.getItem('sb_admin_pedidos')) || [];
+      pedidosGuardados.push({
+        fecha: new Date().toISOString(),
+        items: carrito,
+        tipoEntrega: tipoEntrega
+      });
+      localStorage.setItem('sb_admin_pedidos', JSON.stringify(pedidosGuardados));
+
       // Vaciar carrito y mostrar modal
       guardarCarrito([]);
       renderCarrito();
