@@ -229,6 +229,40 @@
     }
     .seguir-comprando:hover { text-decoration: underline; }
 
+    /* ===== SELECTOR TIPO ENTREGA ===== */
+    .entrega-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .entrega-btn {
+      border: 2px solid #333;
+      background: #111;
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      color: #aaa;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+    }
+    .entrega-btn .entrega-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .entrega-btn.activo { border-color: var(--rojo); background: rgba(217,4,41,0.1); color: #fff; }
+    .info-recojo {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.83rem;
+      color: #aaa;
+      margin-bottom: 15px;
+      display: none;
+    }
+    .info-recojo.visible { display: block; }
+    .info-recojo strong { color: var(--amarillo); }
+
     /* Modal de confirmación */
     .modal-overlay {
       display: none;
@@ -322,12 +356,30 @@
       <!-- RESUMEN -->
       <div class="carrito-resumen" id="carrito-resumen">
         <div class="resumen-titulo">📋 Resumen del Pedido</div>
+
+        <!-- SELECTOR TIPO DE ENTREGA -->
+        <div style="font-size:0.82rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Tipo de entrega</div>
+        <div class="entrega-selector">
+          <button class="entrega-btn activo" id="btn-delivery" onclick="seleccionarEntrega('delivery')">
+            <span class="entrega-icon">🛵</span>
+            Delivery
+          </button>
+          <button class="entrega-btn" id="btn-recojo" onclick="seleccionarEntrega('recojo')">
+            <span class="entrega-icon">🏪</span>
+            Recojo en tienda
+          </button>
+        </div>
+        <div class="info-recojo" id="info-recojo">
+          📍 <strong>Av. Principal 123, Surquillo 15036</strong><br/>
+          🕐 Lun–Vie: 11am–11pm &nbsp;|&nbsp; Sáb–Dom: 10am–12am
+        </div>
+
         <div class="resumen-linea">
           <span>Subtotal</span>
           <span id="res-subtotal">S/. 0.00</span>
         </div>
         <div class="resumen-linea">
-          <span>Delivery</span>
+          <span id="label-delivery">Delivery</span>
           <span id="res-delivery">S/. 5.00</span>
         </div>
         <div class="resumen-linea total">
@@ -417,7 +469,19 @@
     }
 
     // ===== CARRITO =====
-    const DELIVERY = 5.00;
+    const DELIVERY_COSTO = 5.00;
+    let tipoEntrega = 'delivery'; // 'delivery' o 'recojo'
+
+    function seleccionarEntrega(tipo) {
+      tipoEntrega = tipo;
+      document.getElementById('btn-delivery').classList.toggle('activo', tipo === 'delivery');
+      document.getElementById('btn-recojo').classList.toggle('activo', tipo === 'recojo');
+      document.getElementById('info-recojo').classList.toggle('visible', tipo === 'recojo');
+      // Recalcular resumen
+      const carrito = obtenerCarrito();
+      const subtotal = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
+      actualizarResumen(subtotal);
+    }
 
     function obtenerCarrito() {
       return JSON.parse(localStorage.getItem('speedburger_carrito')) || [];
@@ -475,10 +539,12 @@
     }
 
     function actualizarResumen(subtotal) {
-      const delivery = subtotal > 0 ? DELIVERY : 0;
+      const esDelivery = tipoEntrega === 'delivery';
+      const costoEnvio = (subtotal > 0 && esDelivery) ? DELIVERY_COSTO : 0;
+      document.getElementById('label-delivery').textContent = esDelivery ? 'Delivery' : 'Recojo en tienda';
       document.getElementById('res-subtotal').textContent = `S/. ${subtotal.toFixed(2)}`;
-      document.getElementById('res-delivery').textContent = subtotal > 0 ? `S/. ${DELIVERY.toFixed(2)}` : 'Gratis';
-      document.getElementById('res-total').textContent = `S/. ${(subtotal + delivery).toFixed(2)}`;
+      document.getElementById('res-delivery').textContent = costoEnvio > 0 ? `S/. ${costoEnvio.toFixed(2)}` : '🎉 Gratis';
+      document.getElementById('res-total').textContent = `S/. ${(subtotal + costoEnvio).toFixed(2)}`;
     }
 
     function cambiarCantidad(id, delta) {
@@ -509,6 +575,11 @@
     function confirmarPedido() {
       const carrito = obtenerCarrito();
       if (carrito.length === 0) return;
+      // Actualizar mensaje del modal según tipo de entrega
+      const msg = tipoEntrega === 'delivery'
+        ? 'Tu pedido ha sido recibido. Estamos preparando tu comida con mucho sabor.<br/><strong>🛵 Tiempo estimado de entrega: 10-20 min</strong>'
+        : 'Tu pedido ha sido recibido. Pasa a recogerlo a nuestra tienda.<br/><strong>🏪 Av. Principal 123, Surquillo — Listo en 10-15 min</strong>';
+      document.querySelector('.modal-box p').innerHTML = msg;
       // Vaciar carrito y mostrar modal
       guardarCarrito([]);
       renderCarrito();
