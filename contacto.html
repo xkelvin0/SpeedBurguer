@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contáctanos en SpeedBurger. Envíanos tu opinión, encuéntranos en el mapa y comunícate con nuestro equipo." />
+  <title>SpeedBurger | Contacto</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ============ HERO CONTACTO ============ */
+    .contacto-hero {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2e0a0a 50%, #1a1a1a 100%);
+    }
+
+    .contacto-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .contacto-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contacto-hero-content h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .contacto-hero-content h1 span {
+      color: var(--rojo);
+    }
+
+    .contacto-hero-content p {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-top: 15px;
+      max-width: 500px;
+      margin-inline: auto;
+    }
+
+    /* ============ INFO CARDS ============ */
+    .info-section {
+      background: #111;
+      padding: 70px 20px;
+    }
+
+    .info-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .info-card {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 30px 25px;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--rojo);
+    }
+
+    .info-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .info-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      color: var(--amarillo);
+      margin-bottom: 10px;
+    }
+
+    .info-card p,
+    .info-card a {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-decoration: none;
+      display: block;
+    }
+
+    .info-card a:hover {
+      color: var(--rojo);
+    }
+
+    /* ============ MAPA + FORMULARIO ============ */
+    .mapa-form-section {
+      background: #1a1a1a;
+      padding: 80px 20px;
+    }
+
+    .mapa-form-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ---- MAPA ---- */
+    .mapa-container {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #2e2e2e;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .mapa-container iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+    }
+
+    .mapa-label {
+      background: #111;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mapa-label span {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .mapa-label a {
+      color: var(--amarillo);
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-left: auto;
+    }
+
+    .mapa-label a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---- FORMULARIO ---- */
+    .form-card {
+      background: #111;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 35px;
+    }
+
+    .form-card .section-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .form-card h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .form-card h2 span {
+      color: var(--rojo);
+    }
+
+    .form-card .form-desc {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #ccc;
+      font-size: 0.88rem;
+      margin-bottom: 7px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.93rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--rojo);
+    }
+
+    .form-group select option {
+      background: #1a1a1a;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Estrellas de calificación */
+    .stars-group {
+      margin-bottom: 20px;
+    }
+
+    .stars-group label {
+      display: block;
+      color: #ccc;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .stars {
+      display: flex;
+      gap: 8px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .stars input {
+      display: none;
+    }
+
+    .stars label {
+      font-size: 2rem;
+      color: #444;
+      cursor: pointer;
+      transition: color 0.2s;
+      margin-bottom: 0;
+    }
+
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: var(--amarillo);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .btn-enviar {
+      width: 100%;
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 5px;
+    }
+
+    .btn-enviar:hover {
+      background: var(--rojo-oscuro);
+      transform: translateY(-2px);
+    }
+
+    /* Mensaje de éxito */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .form-success .check-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .form-success h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      color: #2ecc71;
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    /* ============ OPINIONES ============ */
+    .opiniones-section {
+      background: #111;
+      padding: 80px 20px;
+    }
+
+    .opiniones-header {
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .opiniones-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .opinion-card {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 25px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .opinion-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--amarillo);
+    }
+
+    .opinion-stars {
+      color: var(--amarillo);
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .opinion-text {
+      color: #ccc;
+      font-size: 0.93rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .opinion-autor {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .opinion-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--rojo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .opinion-nombre {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    .opinion-fecha {
+      color: #666;
+      font-size: 0.78rem;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .mapa-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .opiniones-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar" style="background: rgba(17, 17, 17, 0.98);">
+    <div class="navbar-logo">
+      <a href="index.html" style="display:flex; align-items:center; gap:10px;">
+        <img src="img/logo.png" alt="Logo SpeedBurger" class="logo-img" />
+        <span class="nav-logo-text"><span class="nav-logo-speed">Speed</span><span class="nav-logo-burger">Burger</span></span>
+      </a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <ul class="navbar-links" id="navbar-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+      <li><a href="productos.html" class="btn-nav">Hacer Pedido</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="contacto-hero" id="inicio">
+    <div class="contacto-hero-overlay"></div>
+    <div class="contacto-hero-content">
+      <span class="hero-badge">📞 Estamos para ti</span>
+      <h1>Contáctanos &amp; <span>Opina</span></h1>
+      <p>Tu opinión nos impulsa a ser mejores. Escríbenos, visítanos o deja tu reseña.</p>
+    </div>
+  </section>
+
+  <!-- TARJETAS DE INFO -->
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="info-card-icon">📍</span>
+        <h3>Dirección</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Av.+Principal+123,+Lima" target="_blank" rel="noopener noreferrer">
+          Av. Principal 123, Lima<br />Lima, Perú
+        </a>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon">📱</span>
+        <h3>Teléfono</h3>
+        <a href="tel:+51936726266">+51 936 726 266</a>
+        <a href="mailto:info@SpeedBurger.com" style="margin-top:6px;">info@SpeedBurger.com</a>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon">🕐</span>
+        <h3>Horario</h3>
+        <p>Lun – Vie: 11:00 am – 11:00 pm</p>
+        <p>Sáb – Dom: 10:00 am – 12:00 am</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA + FORMULARIO -->
+  <section class="mapa-form-section">
+    <div class="mapa-form-grid">
+
+      <!-- MAPA GOOGLE -->
+      <div>
+        <div class="section-header" style="text-align:left; margin-bottom: 25px;">
+          <span class="section-tag">Encuéntranos</span>
+          <h2 class="section-title">Nuestra <span>Sucursal</span></h2>
+          <p class="section-desc">Visítanos y vive la experiencia SpeedBurger en persona.</p>
+        </div>
+        <div class="mapa-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.9522889456207!2d-77.04280492394956!3d-12.046374288151466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662bf%3A0x85ef71fa65f49a04!2sPlaza%20Mayor%20de%20Lima!5e0!3m2!1ses!2spe!4v1719000000000!5m2!1ses!2spe"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación SpeedBurger">
+          </iframe>
+          <div class="mapa-label">
+            <span>📍 Av. Principal 123, Lima, Perú</span>
+            <a href="https://maps.google.com/?q=Plaza+Mayor+Lima" target="_blank" rel="noopener noreferrer">Ver en Google Maps ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARIO DE OPINIONES -->
+      <div class="form-card">
+        <span class="section-tag">Tu voz importa</span>
+        <h2>Deja tu <span>Opinión</span></h2>
+        <p class="form-desc">¿Cómo fue tu experiencia con nosotros? Cuéntanos todo — ¡nos ayuda a mejorar!</p>
+
+        <form id="form-opinion" onsubmit="enviarOpinion(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">👤 Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="email">📧 Correo</label>
+              <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tipo">🍔 ¿Qué pediste?</label>
+            <select id="tipo" name="tipo" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="hamburguesa">Hamburguesa</option>
+              <option value="combo">Combo</option>
+              <option value="bebida">Bebida</option>
+              <option value="postre">Postre</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="stars-group">
+            <label>⭐ Calificación</label>
+            <div class="stars" id="stars-container">
+              <input type="radio" id="star5" name="calificacion" value="5" required />
+              <label for="star5" title="5 estrellas">★</label>
+              <input type="radio" id="star4" name="calificacion" value="4" />
+              <label for="star4" title="4 estrellas">★</label>
+              <input type="radio" id="star3" name="calificacion" value="3" />
+              <label for="star3" title="3 estrellas">★</label>
+              <input type="radio" id="star2" name="calificacion" value="2" />
+              <label for="star2" title="2 estrellas">★</label>
+              <input type="radio" id="star1" name="calificacion" value="1" />
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">💬 Tu opinión</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos tu experiencia con SpeedBurger..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-enviar">📨 ENVIAR OPINIÓN</button>
+        </form>
+
+        <!-- Mensaje de éxito -->
+        <div class="form-success" id="form-success">
+          <span class="check-icon">✅</span>
+          <h3>¡Gracias por tu opinión!</h3>
+          <p>Tu reseña fue recibida. Nos ayuda a seguir mejorando el mejor fast food de la ciudad. 🍔</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE OPINIONES EXISTENTES -->
+  <section class="opiniones-section">
+    <div class="opiniones-header section-header">
+      <span class="section-tag">Lo que dicen nuestros clientes</span>
+      <h2 class="section-title">Reseñas <span>Verificadas</span></h2>
+      <p class="section-desc">La satisfacción de nuestros clientes es nuestra mayor recompensa.</p>
+    </div>
+    <div class="opiniones-grid" id="opiniones-grid">
+      <div class="opinion-card">
+        <div class="opinion-stars">★★★★★</div>
+        <p class="opinion-text">"La mejor hamburguesa que he probado en Lima. El pan artesanal hace toda la diferencia. ¡Definitivamente volvería!"</p>
+        <div class="opinion-autor">
+          <div class="opinion-avatar">M</div>
+          <div>
+            <div class="opinion-nombre">María Fernández</div>
+            <div class="opinion-fecha">Combo Clásico · Junio 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="opinion-card">
+        <div class="opinion-stars">★★★★★</div>
+        <p class="opinion-text">"Pedí por delivery y llegó en menos de 15 minutos. Todo caliente y perfectamente empacado. El servicio es increíble."</p>
+        <div class="opinion-autor">
+          <div class="opinion-avatar">C</div>
+          <div>
+            <div class="opinion-nombre">Carlos Ramos</div>
+            <div class="opinion-fecha">Hamburguesa BBQ · Mayo 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="opinion-card">
+        <div class="opinion-stars">★★★★☆</div>
+        <p class="opinion-text">"Los precios son súper accesibles para la calidad que ofrecen. La doble carne es mi favorita. ¡Solo deberían tener más sabores de batido!"</p>
+        <div class="opinion-autor">
+          <div class="opinion-avatar">L</div>
+          <div>
+            <div class="opinion-nombre">Lucía Torres</div>
+            <div class="opinion-fecha">Doble Smash · Abril 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="SpeedBurger Logo" class="footer-logo-img" />
+        <p>El sabor que te mueve. Fast food de primera calidad, hecho con ingredientes frescos y mucho amor. ¡Visítanos hoy!</p>
+        <div class="redes-title">Síguenos</div>
+        <div class="redes-sociales">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="red-social" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="red-social" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 320 512" width="20" height="20" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">🏠 Inicio</a></li>
+          <li><a href="productos.html">🍔 Productos</a></li>
+          <li><a href="nosotros.html">👥 Nosotros</a></li>
+          <li><a href="contacto.html">📞 Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contáctanos</h4>
+        <a href="mailto:info@SpeedBurger.com" class="footer-correo">📧 info@SpeedBurger.com</a>
+        <a href="mailto:pedidos@SpeedBurger.com" class="footer-correo">📦 pedidos@SpeedBurger.com</a>
+        <a href="tel:+51936726266" class="footer-correo">📱 +51 936 726 266</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Av.+Principal+123,+Lima" target="_blank" rel="noopener noreferrer" class="footer-correo">📍 Av. Principal 123, Lima</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresas Aliadas</h4>
+        <div class="aliadas-grid">
+          <a href="https://www.rappi.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge">🛵 Rappi</a>
+          <a href="https://www.pedidosya.com.pe/" target="_blank" rel="noopener noreferrer" class="aliada-badge">🥡 PedidosYa</a>
+          <a href="https://glovoapp.com/" target="_blank" rel="noopener noreferrer" class="aliada-badge">⚡ Glovo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 <span>SpeedBurger</span>. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para los amantes del fast food</p>
+    </div>
+  </footer>
+
+  <!-- Botón Subir al Top -->
+  <a href="#" class="btn-top" id="btnTop" title="Subir al inicio">▲</a>
+
+  <script>
+    // Navbar scroll
+    window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      const btnTop = document.getElementById('btnTop');
+
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(17, 17, 17, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+      }
+
+      if (window.scrollY > 400) {
+        btnTop.classList.add('show');
+      } else {
+        btnTop.classList.remove('show');
+      }
+    });
+
+    // Menú hamburguesa
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarLinks = document.getElementById('navbar-links');
+
+    if (menuToggle && navbarLinks) {
+      menuToggle.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active');
+        menuToggle.textContent = navbarLinks.classList.contains('active') ? '✕' : '☰';
+      });
+    }
+
+    // Envío del formulario de opinión
+    function enviarOpinion(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const tipo = document.getElementById('tipo').value;
+      const mensaje = document.getElementById('mensaje').value.trim();
+      const calificacion = document.querySelector('input[name="calificacion"]:checked');
+
+      if (!calificacion) {
+        alert('Por favor selecciona una calificación con estrellas.');
+        return;
+      }
+
+      const stars = parseInt(calificacion.value);
+      const starStr = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+      const inicial = nombre.charAt(0).toUpperCase();
+
+      // Crear nueva tarjeta de opinión
+      const card = document.createElement('div');
+      card.className = 'opinion-card';
+      card.innerHTML = `
+        <div class="opinion-stars">${starStr}</div>
+        <p class="opinion-text">"${mensaje}"</p>
+        <div class="opinion-autor">
+          <div class="opinion-avatar">${inicial}</div>
+          <div>
+            <div class="opinion-nombre">${nombre}</div>
+            <div class="opinion-fecha">${tipo.charAt(0).toUpperCase() + tipo.slice(1)} · Junio 2026</div>
+          </div>
+        </div>
+      `;
+
+      // Agregar al inicio de las opiniones
+      const grid = document.getElementById('opiniones-grid');
+      grid.insertBefore(card, grid.firstChild);
+
+      // Mostrar mensaje de éxito y ocultar formulario
+      document.getElementById('form-opinion').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+
+      // Scroll hacia las opiniones
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 600);
+    }
+  </script>
+
+</body>
+</html>
