@@ -21,49 +21,55 @@ class Producto {
 }
 
 // 2. ARRAY LIST DE PRODUCTOS (BASE DE DATOS LOCAL - 30 Productos)
-const inventario = [
+const inventarioBase = [
     // --- HAMBURGUESAS (7) ---
-    new Producto(1, "Clásica Burger", "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", 18.90, "Hamburguesas", "img/burger.png"),
-    new Producto(2, "Doble Queso", "Doble carne de res, cuádruple queso cheddar y tocino.", 24.50, "Hamburguesas", "img/doble_queso.png"),
-    new Producto(3, "Bacon BBQ", "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", 22.00, "Hamburguesas", "img/bacon_bbq.png"),
-    new Producto(4, "Spicy Volcano", "Carne 200g, jalapeños, queso pepper jack y salsa picante.", 21.50, "Hamburguesas", "img/spicy_volcano.png"),
-    new Producto(5, "Crispy Chicken Burger", "Pechuga de pollo crujiente, lechuga y mayonesa.", 19.90, "Hamburguesas", "img/chicken_burger.png"),
-    new Producto(6, "Veggie Style", "Hamburguesa de lentejas, palta, tomate y lechuga fresca.", 17.00, "Hamburguesas", "img/veggie_burger.png"),
-    new Producto(7, "Monster Triple", "Triple carne, huevo frito, platano, queso y tocino.", 28.90, "Hamburguesas", "img/monster_triple.png"),
+    { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
+    { id: 2, nombre: "Doble Queso", descripcion: "Doble carne de res, cuádruple queso cheddar y tocino.", precio: 24.50, categoria: "Hamburguesas", imagen: "img/doble_queso.png" },
+    { id: 3, nombre: "Bacon BBQ", descripcion: "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", precio: 22.00, categoria: "Hamburguesas", imagen: "img/bacon_bbq.png" },
+    { id: 4, nombre: "Spicy Volcano", descripcion: "Carne 200g, jalapeños, queso pepper jack y salsa picante.", precio: 21.50, categoria: "Hamburguesas", imagen: "img/spicy_volcano.png" },
+    { id: 5, nombre: "Crispy Chicken Burger", descripcion: "Pechuga de pollo crujiente, lechuga y mayonesa.", precio: 19.90, categoria: "Hamburguesas", imagen: "img/chicken_burger.png" },
+    { id: 6, nombre: "Veggie Style", descripcion: "Hamburguesa de lentejas, palta, tomate y lechuga fresca.", precio: 17.00, categoria: "Hamburguesas", imagen: "img/veggie_burger.png" },
+    { id: 7, nombre: "Monster Triple", descripcion: "Triple carne, huevo frito, platano, queso y tocino.", precio: 28.90, categoria: "Hamburguesas", imagen: "img/monster_triple.png" },
 
     // --- NUGGETS (2) ---
-    new Producto(8, "Nuggets con salsa BBQ", "Porción de nuggets crujientes con papas fritas y salsa BBQ.", 12.90, "Nuggets", "img/nuggets_bbq.png"),
-    new Producto(9, "Nuggets con salsa Acevichada", "Porción de nuggets crujientes con papas fritas y salsa acevichada casera.", 13.90, "Nuggets", "img/nuggets_acevichada.png"),
+    { id: 8, nombre: "Nuggets con salsa BBQ", descripcion: "Porción de nuggets crujientes con papas fritas y salsa BBQ.", precio: 12.90, categoria: "Nuggets", imagen: "img/nuggets_bbq.png" },
+    { id: 9, nombre: "Nuggets con salsa Acevichada", descripcion: "Porción de nuggets crujientes con papas fritas y salsa acevichada casera.", precio: 13.90, categoria: "Nuggets", imagen: "img/nuggets_acevichada.png" },
 
     // --- POLLO BROASTER (4) ---
-    new Producto(10, "Pierna Broaster", "1 jugosa pierna de pollo broaster con ensalada y papas.", 10.00, "Pollo Broaster", "img/pierna_broaster.png"),
-    new Producto(11, "Pecho Broaster", "1 gran pieza de pecho broaster crujiente con ensalada y papas.", 12.00, "Pollo Broaster", "img/pecho_broaster.png"),
-    new Producto(12, "Entrepierna Broaster", "1 jugosa pieza de entrepierna broaster con ensalada y papas.", 11.00, "Pollo Broaster", "img/entrepierna_broaster.png"),
-    new Producto(13, "Alita Broaster", "1 pieza de alita broaster con ensalada y papas.", 9.50, "Pollo Broaster", "img/alita_broaster.png"),
+    { id: 10, nombre: "Pierna Broaster", descripcion: "1 jugosa pierna de pollo broaster con ensalada y papas.", precio: 10.00, categoria: "Pollo Broaster", imagen: "img/pierna_broaster.png" },
+    { id: 11, nombre: "Pecho Broaster", descripcion: "1 gran pieza de pecho broaster crujiente con ensalada y papas.", precio: 12.00, categoria: "Pollo Broaster", imagen: "img/pecho_broaster.png" },
+    { id: 12, nombre: "Entrepierna Broaster", descripcion: "1 jugosa pieza de entrepierna broaster con ensalada y papas.", precio: 11.00, categoria: "Pollo Broaster", imagen: "img/entrepierna_broaster.png" },
+    { id: 13, nombre: "Alita Broaster", descripcion: "1 pieza de alita broaster con ensalada y papas.", precio: 9.50, categoria: "Pollo Broaster", imagen: "img/alita_broaster.png" },
 
     // --- SALCHIPAPAS (5) ---
-    new Producto(14, "SalchiClásica", "Papas fritas y hot dog frankfurt con cremas.", 10.00, "Salchipapas", "img/salchiclasica.png"),
-    new Producto(15, "SalchiEspecial", "Papas, hot dog, huevo frito y queso derretido.", 16.50, "Salchipapas", "img/salchiespecial.png"),
-    new Producto(16, "SalchiPechuga", "Papas fritas, hotdog y trozos de pechuga broaster.", 15.00, "Salchipapas", "img/salchipechuga.png"),
-    new Producto(17, "SalchiCarne", "Papas fritas, hotdog, carne picada y chorizo.", 18.00, "Salchipapas", "img/salchicarne.png"),
-    new Producto(18, "SalchiMonster", "Papas, hot dog, pollo, carne, huevo, chorizo y tocino.", 25.00, "Salchipapas", "img/salchimonster.png"),
+    { id: 14, nombre: "SalchiClásica", descripcion: "Papas fritas y hot dog frankfurt con cremas.", precio: 10.00, categoria: "Salchipapas", imagen: "img/salchiclasica.png" },
+    { id: 15, nombre: "SalchiEspecial", descripcion: "Papas, hot dog, huevo frito y queso derretido.", precio: 16.50, categoria: "Salchipapas", imagen: "img/salchiespecial.png" },
+    { id: 16, nombre: "SalchiPechuga", descripcion: "Papas fritas, hotdog y trozos de pechuga broaster.", precio: 15.00, categoria: "Salchipapas", imagen: "img/salchipechuga.png" },
+    { id: 17, nombre: "SalchiCarne", descripcion: "Papas fritas, hotdog, carne picada y chorizo.", precio: 18.00, categoria: "Salchipapas", imagen: "img/salchicarne.png" },
+    { id: 18, nombre: "SalchiMonster", descripcion: "Papas, hot dog, pollo, carne, huevo, chorizo y tocino.", precio: 25.00, categoria: "Salchipapas", imagen: "img/salchimonster.png" },
 
     // --- ALITAS (4) ---
-    new Producto(19, "Alitas BBQ (6 und)", "6 alitas bañadas en nuestra salsa BBQ casera.", 16.00, "Alitas", "img/alitas.png"),
-    new Producto(20, "Alitas Buffalo (6 und)", "6 alitas con salsa buffalo picante y dip de blue cheese.", 17.50, "Alitas", "img/alitas_buffalo_papas.png"),
-    new Producto(21, "Alitas Teriyaki (6 und)", "6 alitas dulces con salsa teriyaki y semillas de sésamo.", 18.00, "Alitas", "img/alitas_teriyaki_papas.png"),
-    new Producto(22, "Alitas acevichadas (6 und)", "6 alitas bañadas en nuestra salsa acevichada casera.", 18.00, "Alitas", "img/alitas_acevichada_papas.png"),
+    { id: 19, nombre: "Alitas BBQ (6 und)", descripcion: "6 alitas bañadas en nuestra salsa BBQ casera.", precio: 16.00, categoria: "Alitas", imagen: "img/alitas.png" },
+    { id: 20, nombre: "Alitas Buffalo (6 und)", descripcion: "6 alitas con salsa buffalo picante y dip de blue cheese.", precio: 17.50, categoria: "Alitas", imagen: "img/alitas_buffalo_papas.png" },
+    { id: 21, nombre: "Alitas Teriyaki (6 und)", descripcion: "6 alitas dulces con salsa teriyaki y semillas de sésamo.", precio: 18.00, categoria: "Alitas", imagen: "img/alitas_teriyaki_papas.png" },
+    { id: 22, nombre: "Alitas acevichadas (6 und)", descripcion: "6 alitas bañadas en nuestra salsa acevichada casera.", precio: 18.00, categoria: "Alitas", imagen: "img/alitas_acevichada_papas.png" },
 
     // --- BEBIDAS (6) ---
-    new Producto(23, "Inca Kola 600ml", "Gaseosa helada Inca Kola personal.", 4.00, "Bebidas", "img/inca_kola_botella.png"),
-    new Producto(24, "Coca Cola 600ml", "Gaseosa helada Coca Cola personal.", 4.00, "Bebidas", "img/coca_cola_botella.png"),
-    new Producto(25, "Chicha Morada 1L", "Jarra de chicha morada natural y helada.", 10.00, "Bebidas", "img/chicha_morada.png"),
-    new Producto(26, "Mojito Clásico", "Trago refrescante con ron, menta, limón y soda.", 15.00, "Bebidas", "img/mojito.png"),
-    new Producto(27, "Mojito Maracuyá", "Variante tropical del mojito con pulpa de maracuyá.", 16.00, "Bebidas", "img/mojito_maracuya.png"),
-    new Producto(28, "Pisco Sour", "Coctel bandera peruano, preparado al instante.", 18.00, "Bebidas", "img/pisco_sour.png"),
-    new Producto(29, "Cuba Libre", "Clásico trago con ron, Coca Cola y un toque de limón.", 14.00, "Bebidas", "img/cuba_libre.png"),
-    new Producto(30, "Limonada Frozen", "Refrescante limonada batida con hielo granizado.", 6.50, "Bebidas", "img/limonada_frozen.png")
+    { id: 23, nombre: "Inca Kola 600ml", descripcion: "Gaseosa helada Inca Kola personal.", precio: 4.00, categoria: "Bebidas", imagen: "img/inca_kola_botella.png" },
+    { id: 24, nombre: "Coca Cola 600ml", descripcion: "Gaseosa helada Coca Cola personal.", precio: 4.00, categoria: "Bebidas", imagen: "img/coca_cola_botella.png" },
+    { id: 25, nombre: "Chicha Morada 1L", descripcion: "Jarra de chicha morada natural y helada.", precio: 10.00, categoria: "Bebidas", imagen: "img/chicha_morada.png" },
+    { id: 26, nombre: "Mojito Clásico", descripcion: "Trago refrescante con ron, menta, limón y soda.", precio: 15.00, categoria: "Bebidas", imagen: "img/mojito.png" },
+    { id: 27, nombre: "Mojito Maracuyá", descripcion: "Variante tropical del mojito con pulpa de maracuyá.", precio: 16.00, categoria: "Bebidas", imagen: "img/mojito_maracuya.png" },
+    { id: 28, nombre: "Pisco Sour", descripcion: "Coctel bandera peruano, preparado al instante.", precio: 18.00, categoria: "Bebidas", imagen: "img/pisco_sour.png" },
+    { id: 29, nombre: "Cuba Libre", descripcion: "Clásico trago con ron, Coca Cola y un toque de limón.", precio: 14.00, categoria: "Bebidas", imagen: "img/cuba_libre.png" },
+    { id: 30, nombre: "Limonada Frozen", descripcion: "Refrescante limonada batida con hielo granizado.", precio: 6.50, categoria: "Bebidas", imagen: "img/limonada_frozen.png" }
 ];
+
+const dataLocal = localStorage.getItem('sb_admin_productos');
+const rawInventario = dataLocal ? JSON.parse(dataLocal) : inventarioBase;
+
+// Mapear los datos raw a objetos de la clase Producto para tener el método getPrecioFormateado()
+const inventario = rawInventario.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen));
 
 // 3. ESTRUCTURAS DE PROGRAMACIÓN Y MÉTODOS DE RENDERIZADO
 
