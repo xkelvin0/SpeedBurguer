@@ -1617,12 +1617,12 @@ img {
     }
 
     /* ============ INFO CARDS ============ */
-    .info-section {
+    .contacto-info-section {
       background: #111;
       padding: 70px 20px;
     }
 
-    .info-grid {
+    .contacto-info-grid {
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
@@ -1970,7 +1970,7 @@ img {
         grid-template-columns: 1fr;
       }
 
-      .info-grid {
+      .contacto-info-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1984,7 +1984,7 @@ img {
     }
 
     @media (max-width: 600px) {
-      .info-grid {
+      .contacto-info-grid {
         grid-template-columns: 1fr;
       }
     }
