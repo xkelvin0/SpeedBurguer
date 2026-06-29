@@ -2144,7 +2144,7 @@ img {
     .admin-topbar-title {
       font-family: 'Oswald', sans-serif;
       font-size: 1.2rem;
-      color: #fff;
+      color: var(--amarillo);
     }
     .admin-topbar-title span { color: var(--rojo); }
     .badge-admin {
