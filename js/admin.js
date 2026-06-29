@@ -279,8 +279,20 @@ function inicializarGraficos() {
       datasets: [{
         label: 'Unidades Vendidas',
         data: datosBarras,
-        backgroundColor: 'rgba(217, 4, 41, 0.7)',
-        borderColor: '#d90429',
+        backgroundColor: [
+          'rgba(217, 4, 41, 0.7)',  // Rojo
+          'rgba(255, 195, 0, 0.7)', // Amarillo
+          'rgba(255, 87, 51, 0.7)', // Naranja
+          'rgba(46, 204, 113, 0.7)',// Verde
+          'rgba(52, 152, 219, 0.7)' // Azul
+        ],
+        borderColor: [
+          '#d90429',
+          '#ffc300',
+          '#ff5733',
+          '#2ecc71',
+          '#3498db'
+        ],
         borderWidth: 1,
         borderRadius: 6
       }]
