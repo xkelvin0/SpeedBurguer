@@ -2491,6 +2491,7 @@ img {
       border: 1px solid #2e2e2e;
       border-radius: 12px;
       padding: 20px;
+      min-width: 0;
     }
     .chart-title {
       font-family: 'Oswald', sans-serif;
