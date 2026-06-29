@@ -13,6 +13,7 @@ class Producto {
         this.categoria = categoria;
         this.imagen = imagen;
         this.precioOferta = arguments.length > 6 ? arguments[6] : null;
+        this.activo = arguments.length > 7 ? arguments[7] : true;
     }
 
     // Método para formatear el precio
@@ -72,11 +73,9 @@ const inventarioBase = [
 const dataLocal = localStorage.getItem('sb_admin_productos');
 const rawInventario = dataLocal ? JSON.parse(dataLocal) : inventarioBase;
 
-// Solo mantenemos en el inventario público los que no estén deshabilitados
-const inventarioPublico = rawInventario.filter(p => p.activo !== false);
-
 // Mapear los datos raw a objetos de la clase Producto para tener el método getPrecioFormateado()
-const inventario = inventarioPublico.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen, p.precioOferta));
+// Pasamos el estado activo (p.activo !== false asegura que por defecto sea true)
+const inventario = rawInventario.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen, p.precioOferta, p.activo !== false));
 
 // 3. ESTRUCTURAS DE PROGRAMACIÓN Y MÉTODOS DE RENDERIZADO
 
@@ -86,8 +85,15 @@ const botonesFiltro = document.querySelectorAll(".btn-filtro");
 
 // Función para generar el HTML de una tarjeta de producto
 function generarHTMLProducto(producto) {
+    const isActivo = producto.activo;
+    const cardStyle = isActivo ? '' : 'opacity: 0.65; filter: grayscale(50%); pointer-events: none;';
+    const agotadoBadge = !isActivo ? `<div style="position:absolute; top:40%; left:50%; background:rgba(217,4,41,0.9); color:white; padding:10px 25px; font-weight:900; font-size:1.5rem; letter-spacing:2px; transform:translate(-50%, -50%) rotate(-10deg); border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index:10; border-radius:8px;">AGOTADO</div>` : '';
+    const btnStyle = isActivo ? '' : 'background:#555; color:#999; border-color:#555; cursor:not-allowed; box-shadow:none;';
+    const btnText = isActivo ? '🛒 Ordenar' : 'Agotado';
+
     return `
-      <div class="producto-card">
+      <div class="producto-card" style="position:relative; ${cardStyle}">
+        ${agotadoBadge}
         ${producto.precioOferta ? `<span class="producto-card-badge oferta" style="top:48px; background:var(--rojo); color:#fff;">🎉 POR FIESTAS PATRIAS</span>` : ''}
         <span class="producto-card-badge">${producto.categoria}</span>
         <div class="producto-img-wrapper">
@@ -98,7 +104,7 @@ function generarHTMLProducto(producto) {
           <p class="producto-desc">${producto.descripcion}</p>
           <div class="producto-footer">
             <span class="producto-precio">${producto.getPrecioFormateado()}</span>
-            <button class="btn-ordenar" onclick="agregarAlCarrito(${producto.id})">🛒 Ordenar</button>
+            <button class="btn-ordenar" onclick="agregarAlCarrito(${producto.id})" style="${btnStyle}">${btnText}</button>
           </div>
         </div>
       </div>
