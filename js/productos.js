@@ -85,7 +85,7 @@ const botonesFiltro = document.querySelectorAll(".btn-filtro");
 function generarHTMLProducto(producto) {
     return `
       <div class="producto-card">
-        ${producto.precioOferta ? `<span class="producto-card-badge oferta" style="top:40px; background:var(--rojo); color:#fff;">🎉 Fiestas Patrias</span>` : ''}
+        ${producto.precioOferta ? `<span class="producto-card-badge oferta" style="top:48px; background:var(--rojo); color:#fff;">🎉 POR FIESTAS PATRIAS</span>` : ''}
         <span class="producto-card-badge">${producto.categoria}</span>
         <div class="producto-img-wrapper">
           <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img">
