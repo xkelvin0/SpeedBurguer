@@ -72,8 +72,11 @@ const inventarioBase = [
 const dataLocal = localStorage.getItem('sb_admin_productos');
 const rawInventario = dataLocal ? JSON.parse(dataLocal) : inventarioBase;
 
+// Solo mantenemos en el inventario público los que no estén deshabilitados
+const inventarioPublico = rawInventario.filter(p => p.activo !== false);
+
 // Mapear los datos raw a objetos de la clase Producto para tener el método getPrecioFormateado()
-const inventario = rawInventario.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen, p.precioOferta));
+const inventario = inventarioPublico.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen, p.precioOferta));
 
 // 3. ESTRUCTURAS DE PROGRAMACIÓN Y MÉTODOS DE RENDERIZADO
 

@@ -102,11 +102,19 @@ function renderTabla(lista) {
     return;
   }
 
-  tbody.innerHTML = lista.map(p => `
-    <tr id="row-${p.id}">
+  tbody.innerHTML = lista.map(p => {
+    const isActivo = p.activo !== false;
+    const opacityStyle = isActivo ? '' : 'opacity: 0.5;';
+    const toggleBtnClass = isActivo ? 'btn-del' : 'btn-edit';
+    const toggleBtnIcon = isActivo ? '🚫' : '✅';
+    const toggleBtnText = isActivo ? 'Deshabilitar' : 'Habilitar';
+    const badgeHtml = !isActivo ? `<br><span style="background:var(--rojo); padding:2px 6px; border-radius:10px; font-size:0.7rem; color:#fff; display:inline-block; margin-top:5px;">Inactivo</span>` : '';
+
+    return `
+    <tr id="row-${p.id}" style="${opacityStyle}">
       <td><span class="td-id">#${p.id}</span></td>
       <td><img src="${p.imagen}" alt="${p.nombre}" class="td-img" onerror="this.src='img/logo.png'" /></td>
-      <td><span class="td-nombre">${p.nombre}</span></td>
+      <td><span class="td-nombre">${p.nombre}</span>${badgeHtml}</td>
       <td style="max-width:220px; color:#888; font-size:0.82rem;">${p.descripcion}</td>
       <td><span class="td-cat">${p.categoria}</span></td>
       <td>
@@ -117,11 +125,12 @@ function renderTabla(lista) {
       <td>
         <div class="acciones-td">
           <button class="btn-edit" onclick="editarProducto(${p.id})">✏️ Editar</button>
+          <button class="${toggleBtnClass}" style="opacity: 1;" onclick="toggleEstadoProducto(${p.id})">${toggleBtnIcon} ${toggleBtnText}</button>
           <button class="btn-del" onclick="eliminarProducto(${p.id})">🗑️ Eliminar</button>
         </div>
       </td>
     </tr>
-  `).join('');
+  `}).join('');
 }
 
 // ===== BUSCAR =====
@@ -191,13 +200,14 @@ function guardarProducto(e) {
     // MODIFICAR producto existente
     const idx = lista.findIndex(p => p.id === parseInt(id));
     if (idx !== -1) {
-      lista[idx] = { id: parseInt(id), nombre, descripcion, precio, precioOferta, categoria, imagen };
+      const activo = lista[idx].activo !== false;
+      lista[idx] = { id: parseInt(id), nombre, descripcion, precio, precioOferta, categoria, imagen, activo };
       mostrarToast('✅ Producto actualizado correctamente');
     }
   } else {
     // AÑADIR nuevo producto
     const nuevoId = generarId(lista);
-    lista.push({ id: nuevoId, nombre, descripcion, precio, precioOferta, categoria, imagen });
+    lista.push({ id: nuevoId, nombre, descripcion, precio, precioOferta, categoria, imagen, activo: true });
     mostrarToast('✅ Producto añadido correctamente');
   }
 
@@ -223,6 +233,19 @@ function eliminarProducto(id) {
     const nuevaLista = lista.filter(p => p.id !== id);
     guardarProductos(nuevaLista);
     mostrarToast('🗑️ Producto eliminado', true);
+    inicializar();
+  }
+}
+
+// ===== TOGGLE ESTADO =====
+function toggleEstadoProducto(id) {
+  const lista = obtenerProductos();
+  const idx = lista.findIndex(p => p.id === id);
+  if (idx !== -1) {
+    const estadoActual = lista[idx].activo !== false;
+    lista[idx].activo = !estadoActual;
+    guardarProductos(lista);
+    mostrarToast(lista[idx].activo ? '✅ Producto habilitado' : '🚫 Producto deshabilitado');
     inicializar();
   }
 }
