@@ -451,13 +451,15 @@
 
     // Lógica para mostrar los CVs
     function showCV(id) {
-      // Ocultar todos los CVs
+      const selected = document.getElementById(id);
+      const isAlreadyVisible = selected && !selected.classList.contains('hidden');
+
+      // Ocultar todos los CVs primero
       const allCvs = document.querySelectorAll('.cv-card');
       allCvs.forEach(cv => cv.classList.add('hidden'));
 
-      // Mostrar el seleccionado
-      const selected = document.getElementById(id);
-      if (selected) {
+      // Mostrar el seleccionado solo si NO estaba ya visible
+      if (selected && !isAlreadyVisible) {
         selected.classList.remove('hidden');
         // Scroll suave hacia el CV para una mejor experiencia
         setTimeout(() => {
