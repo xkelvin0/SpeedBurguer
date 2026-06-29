@@ -12,10 +12,14 @@ class Producto {
         this.precio = precio;
         this.categoria = categoria;
         this.imagen = imagen;
+        this.precioOferta = arguments.length > 6 ? arguments[6] : null;
     }
 
     // Método para formatear el precio
     getPrecioFormateado() {
+        if (this.precioOferta) {
+            return `<del style="color:#888; font-size:0.9rem; margin-right:8px;">S/. ${this.precio.toFixed(2)}</del><span style="color:var(--rojo);">S/. ${this.precioOferta.toFixed(2)}</span>`;
+        }
         return `S/. ${this.precio.toFixed(2)}`;
     }
 }
@@ -23,7 +27,7 @@ class Producto {
 // 2. ARRAY LIST DE PRODUCTOS (BASE DE DATOS LOCAL - 30 Productos)
 const inventarioBase = [
     // --- HAMBURGUESAS (7) ---
-    { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
+    { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, precioOferta: 12.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
     { id: 2, nombre: "Doble Queso", descripcion: "Doble carne de res, cuádruple queso cheddar y tocino.", precio: 24.50, categoria: "Hamburguesas", imagen: "img/doble_queso.png" },
     { id: 3, nombre: "Bacon BBQ", descripcion: "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", precio: 22.00, categoria: "Hamburguesas", imagen: "img/bacon_bbq.png" },
     { id: 4, nombre: "Spicy Volcano", descripcion: "Carne 200g, jalapeños, queso pepper jack y salsa picante.", precio: 21.50, categoria: "Hamburguesas", imagen: "img/spicy_volcano.png" },
@@ -69,7 +73,7 @@ const dataLocal = localStorage.getItem('sb_admin_productos');
 const rawInventario = dataLocal ? JSON.parse(dataLocal) : inventarioBase;
 
 // Mapear los datos raw a objetos de la clase Producto para tener el método getPrecioFormateado()
-const inventario = rawInventario.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen));
+const inventario = rawInventario.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.categoria, p.imagen, p.precioOferta));
 
 // 3. ESTRUCTURAS DE PROGRAMACIÓN Y MÉTODOS DE RENDERIZADO
 
@@ -81,6 +85,7 @@ const botonesFiltro = document.querySelectorAll(".btn-filtro");
 function generarHTMLProducto(producto) {
     return `
       <div class="producto-card">
+        ${producto.precioOferta ? `<span class="producto-card-badge oferta" style="top:40px; background:var(--rojo); color:#fff;">🎉 Fiestas Patrias</span>` : ''}
         <span class="producto-card-badge">${producto.categoria}</span>
         <div class="producto-img-wrapper">
           <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img">
@@ -167,7 +172,7 @@ function agregarAlCarrito(id) {
         carrito.push({
             id: producto.id,
             nombre: producto.nombre,
-            precio: producto.precio,
+            precio: producto.precioOferta ? producto.precioOferta : producto.precio,
             imagen: producto.imagen,
             categoria: producto.categoria,
             cantidad: 1
@@ -225,3 +230,81 @@ document.addEventListener("DOMContentLoaded", () => {
 const style = document.createElement('style');
 style.textContent = `@keyframes slideUpToast { from { opacity:0; transform: translateX(-50%) translateY(20px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }`;
 document.head.appendChild(style);
+
+
+/* === LÓGICA DE CONTACTO Y NAVBAR === */
+// Navbar scroll
+window.addEventListener('scroll', function () {
+  const navbar = document.getElementById('navbar');
+  const btnTop = document.getElementById('btnTop');
+
+  if (window.scrollY > 50) {
+    navbar.style.background = 'rgba(17, 17, 17, 0.98)';
+  } else {
+    navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+  }
+
+  if (window.scrollY > 400) {
+    btnTop.classList.add('show');
+  } else {
+    btnTop.classList.remove('show');
+  }
+});
+
+// Menú hamburguesa
+const menuToggle = document.getElementById('menu-toggle');
+const navbarLinks = document.getElementById('navbar-links');
+
+if (menuToggle && navbarLinks) {
+  menuToggle.addEventListener('click', () => {
+    navbarLinks.classList.toggle('active');
+    menuToggle.textContent = navbarLinks.classList.contains('active') ? '✕' : '☰';
+  });
+}
+
+// Envío del formulario de opinión
+function enviarOpinion(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const tipo = document.getElementById('tipo').value;
+  const mensaje = document.getElementById('mensaje').value.trim();
+  const calificacion = document.querySelector('input[name="calificacion"]:checked');
+
+  if (!calificacion) {
+    alert('Por favor selecciona una calificación con estrellas.');
+    return;
+  }
+
+  const stars = parseInt(calificacion.value);
+  const starStr = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+  const inicial = nombre.charAt(0).toUpperCase();
+
+  // Crear nueva tarjeta de opinión
+  const card = document.createElement('div');
+  card.className = 'opinion-card';
+  card.innerHTML = `
+    <div class="opinion-stars">${starStr}</div>
+    <p class="opinion-text">"${mensaje}"</p>
+    <div class="opinion-autor">
+      <div class="opinion-avatar">${inicial}</div>
+      <div>
+        <div class="opinion-nombre">${nombre}</div>
+        <div class="opinion-fecha">${tipo.charAt(0).toUpperCase() + tipo.slice(1)} · Junio 2026</div>
+      </div>
+    </div>
+  `;
+
+  // Agregar al inicio de las opiniones
+  const grid = document.getElementById('opiniones-grid');
+  grid.insertBefore(card, grid.firstChild);
+
+  // Mostrar mensaje de éxito y ocultar formulario
+  document.getElementById('form-opinion').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+
+  // Scroll hacia las opiniones
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 600);
+}

@@ -5,7 +5,7 @@ if (sessionStorage.getItem('sb_admin_auth') !== 'true') {
 
 // ===== DATOS BASE (los mismos de productos.js) =====
 const PRODUCTOS_BASE = [
-  { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
+  { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, precioOferta: 12.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
   { id: 2, nombre: "Doble Queso", descripcion: "Doble carne de res, cuádruple queso cheddar y tocino.", precio: 24.50, categoria: "Hamburguesas", imagen: "img/doble_queso.png" },
   { id: 3, nombre: "Bacon BBQ", descripcion: "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", precio: 22.00, categoria: "Hamburguesas", imagen: "img/bacon_bbq.png" },
   { id: 4, nombre: "Spicy Volcano", descripcion: "Carne 200g, jalapeños, queso pepper jack y salsa picante.", precio: 21.50, categoria: "Hamburguesas", imagen: "img/spicy_volcano.png" },
@@ -109,7 +109,11 @@ function renderTabla(lista) {
       <td><span class="td-nombre">${p.nombre}</span></td>
       <td style="max-width:220px; color:#888; font-size:0.82rem;">${p.descripcion}</td>
       <td><span class="td-cat">${p.categoria}</span></td>
-      <td><span class="td-precio">S/. ${p.precio.toFixed(2)}</span></td>
+      <td>
+        <span class="td-precio">
+          ${p.precioOferta ? `<del style="color:#888; font-size:0.8rem;">S/. ${p.precio.toFixed(2)}</del><br>S/. ${p.precioOferta.toFixed(2)}` : `S/. ${p.precio.toFixed(2)}`}
+        </span>
+      </td>
       <td>
         <div class="acciones-td">
           <button class="btn-edit" onclick="editarProducto(${p.id})">✏️ Editar</button>
@@ -154,6 +158,7 @@ function abrirModal(producto = null) {
   document.getElementById('form-nombre').value = producto ? producto.nombre : '';
   document.getElementById('form-desc').value = producto ? producto.descripcion : '';
   document.getElementById('form-precio').value = producto ? producto.precio : '';
+  document.getElementById('form-precio-oferta').value = (producto && producto.precioOferta) ? producto.precioOferta : '';
   document.getElementById('form-cat').value = producto ? producto.categoria : '';
   document.getElementById('form-img').value = producto ? producto.imagen : '';
 
@@ -177,6 +182,8 @@ function guardarProducto(e) {
   const nombre = document.getElementById('form-nombre').value.trim();
   const descripcion = document.getElementById('form-desc').value.trim();
   const precio = parseFloat(document.getElementById('form-precio').value);
+  const poRaw = document.getElementById('form-precio-oferta').value;
+  const precioOferta = poRaw ? parseFloat(poRaw) : null;
   const categoria = document.getElementById('form-cat').value;
   const imagen = document.getElementById('form-img').value.trim() || 'img/logo.png';
 
@@ -184,13 +191,13 @@ function guardarProducto(e) {
     // MODIFICAR producto existente
     const idx = lista.findIndex(p => p.id === parseInt(id));
     if (idx !== -1) {
-      lista[idx] = { id: parseInt(id), nombre, descripcion, precio, categoria, imagen };
+      lista[idx] = { id: parseInt(id), nombre, descripcion, precio, precioOferta, categoria, imagen };
       mostrarToast('✅ Producto actualizado correctamente');
     }
   } else {
     // AÑADIR nuevo producto
     const nuevoId = generarId(lista);
-    lista.push({ id: nuevoId, nombre, descripcion, precio, categoria, imagen });
+    lista.push({ id: nuevoId, nombre, descripcion, precio, precioOferta, categoria, imagen });
     mostrarToast('✅ Producto añadido correctamente');
   }
 
