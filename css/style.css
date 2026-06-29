@@ -2125,7 +2125,7 @@ img {
     .login-page .back-link:hover { color: var(--amarillo); }
 /* === ESTILOS ADMIN === */
 
-    .admin-page { background: #0d0d0d; }
+    .admin-page { background: #0d0d0d; overflow-x: hidden; width: 100%; }
 
     /* ===== TOPBAR ADMIN ===== */
     .admin-topbar {
@@ -2267,6 +2267,7 @@ img {
       border-radius: 12px;
       overflow-x: auto;
       overflow-y: hidden;
+      width: 100%;
     }
     .tabla-header {
       padding: 18px 22px;
@@ -2284,6 +2285,7 @@ img {
 
     table {
       width: 100%;
+      min-width: 800px;
       border-collapse: collapse;
     }
     thead th {
