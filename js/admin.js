@@ -322,7 +322,21 @@ function inicializarGraficos() {
     },
     options: {
       responsive: true,
-      plugins: { legend: { display: false } },
+      plugins: { 
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let label = context.dataset.label || '';
+              if (label) { label += ': '; }
+              const val = context.raw;
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const percentage = total > 0 ? Math.round((val / total) * 100) + '%' : '0%';
+              return label + val + ' (' + percentage + ')';
+            }
+          }
+        }
+      },
       scales: {
         y: { beginAtZero: true, grid: { color: '#333' }, ticks: { color: '#aaa', stepSize: 1 } },
         x: { grid: { display: false }, ticks: { color: '#aaa' } }
@@ -361,7 +375,19 @@ function inicializarGraficos() {
     options: {
       responsive: true,
       plugins: {
-        legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Poppins' } } }
+        legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Poppins' } } },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let label = context.label || '';
+              if (label) { label += ': '; }
+              const val = context.raw;
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const percentage = total > 0 ? Math.round((val / total) * 100) + '%' : '0%';
+              return label + val + ' (' + percentage + ')';
+            }
+          }
+        }
       }
     }
   });
