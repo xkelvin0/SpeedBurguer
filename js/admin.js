@@ -5,7 +5,7 @@ if (sessionStorage.getItem('sb_admin_auth') !== 'true') {
 
 // ===== DATOS BASE (los mismos de productos.js) =====
 const PRODUCTOS_BASE = [
-  { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, precioOferta: 12.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
+  { id: 1, nombre: "Clásica Burger", descripcion: "Carne 200g, queso cheddar, lechuga, tomate y salsa especial.", precio: 18.90, categoria: "Hamburguesas", imagen: "img/burger.png" },
   { id: 2, nombre: "Doble Queso", descripcion: "Doble carne de res, cuádruple queso cheddar y tocino.", precio: 24.50, categoria: "Hamburguesas", imagen: "img/doble_queso.png" },
   { id: 3, nombre: "Bacon BBQ", descripcion: "Carne 200g, tocino crujiente, aros de cebolla y salsa BBQ.", precio: 22.00, categoria: "Hamburguesas", imagen: "img/bacon_bbq.png" },
   { id: 4, nombre: "Spicy Volcano", descripcion: "Carne 200g, jalapeños, queso pepper jack y salsa picante.", precio: 21.50, categoria: "Hamburguesas", imagen: "img/spicy_volcano.png" },
