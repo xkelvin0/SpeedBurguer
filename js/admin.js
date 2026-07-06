@@ -413,7 +413,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (!isNaN(precio) && descuento > 0) {
         const oferta = precio - (precio * (descuento / 100));
-        inputPrecioOferta.value = oferta.toFixed(2);
+        // Redondear a 1 decimal (ej: 13.23 -> 13.2)
+        const ofertaRedondeada = Math.round(oferta * 10) / 10;
+        // Mostrar sin el '.0' si es un número entero
+        inputPrecioOferta.value = Number.isInteger(ofertaRedondeada) ? ofertaRedondeada : ofertaRedondeada.toFixed(1);
       } else if (descuento === 0) {
         inputPrecioOferta.value = '';
       }
