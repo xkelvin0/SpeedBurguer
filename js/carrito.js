@@ -26,8 +26,7 @@
       document.getElementById('info-recojo').classList.toggle('visible', tipo === 'recojo');
       // Recalcular resumen
       const carrito = obtenerCarrito();
-      const subtotal = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
-      actualizarResumen(subtotal);
+      actualizarResumen(carrito);
     }
 
     function obtenerCarrito() {
@@ -58,18 +57,24 @@
             <a href="productos.html" class="btn-primary" style="display:inline-block; padding:13px 30px; font-size:1rem;">Ver Menú</a>
           </div>`;
         document.getElementById('btn-confirmar').disabled = true;
-        actualizarResumen(0);
+        actualizarResumen([]);
         return;
       }
 
       document.getElementById('btn-confirmar').disabled = false;
-      lista.innerHTML = carrito.map(item => `
+      lista.innerHTML = carrito.map(item => {
+        const tieneDescuento = item.precioOriginal && item.precioOriginal > item.precio;
+        const precioUnitHtml = tieneDescuento 
+          ? `<del style="color:#888; font-size:0.8rem;">S/. ${item.precioOriginal.toFixed(2)}</del> S/. ${item.precio.toFixed(2)} c/u`
+          : `S/. ${item.precio.toFixed(2)} c/u`;
+          
+        return `
         <div class="carrito-item" id="item-${item.id}">
           <img src="${item.imagen}" alt="${item.nombre}" onerror="this.src='img/logo.png'" />
           <div class="carrito-item-info">
             <div class="carrito-item-nombre">${item.nombre}</div>
             <div class="carrito-item-categoria">${item.categoria}</div>
-            <div class="carrito-item-precio-unit">S/. ${item.precio.toFixed(2)} c/u</div>
+            <div class="carrito-item-precio-unit">${precioUnitHtml}</div>
           </div>
           <div class="carrito-qty">
             <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">−</button>
@@ -79,19 +84,39 @@
           <div class="carrito-item-subtotal">S/. ${(item.precio * item.cantidad).toFixed(2)}</div>
           <button class="btn-eliminar" onclick="eliminarItem(${item.id})" title="Eliminar">✕</button>
         </div>
-      `).join('');
+        `;
+      }).join('');
 
-      const subtotal = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
-      actualizarResumen(subtotal);
+      actualizarResumen(carrito);
     }
 
-    function actualizarResumen(subtotal) {
+    function actualizarResumen(carrito) {
+      const subtotalReal = carrito.reduce((s, i) => {
+        const p = i.precioOriginal ? i.precioOriginal : i.precio;
+        return s + p * i.cantidad;
+      }, 0);
+      
+      const subtotalConDescuento = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
+      const descuentoTotal = subtotalReal - subtotalConDescuento;
+
       const esDelivery = tipoEntrega === 'delivery';
-      const costoEnvio = (subtotal > 0 && esDelivery) ? DELIVERY_COSTO : 0;
+      const costoEnvio = (subtotalConDescuento > 0 && esDelivery) ? DELIVERY_COSTO : 0;
+      
       document.getElementById('label-delivery').textContent = esDelivery ? 'Delivery' : 'Recojo en tienda';
-      document.getElementById('res-subtotal').textContent = `S/. ${subtotal.toFixed(2)}`;
+      document.getElementById('res-subtotal').textContent = `S/. ${subtotalReal.toFixed(2)}`;
       document.getElementById('res-delivery').textContent = costoEnvio > 0 ? `S/. ${costoEnvio.toFixed(2)}` : '🎉 Gratis';
-      document.getElementById('res-total').textContent = `S/. ${(subtotal + costoEnvio).toFixed(2)}`;
+      
+      const resDescuentoContainer = document.getElementById('resumen-descuento-container');
+      if (resDescuentoContainer) {
+        if (descuentoTotal > 0) {
+          document.getElementById('res-descuento').textContent = `- S/. ${descuentoTotal.toFixed(2)}`;
+          resDescuentoContainer.style.display = 'flex';
+        } else {
+          resDescuentoContainer.style.display = 'none';
+        }
+      }
+
+      document.getElementById('res-total').textContent = `S/. ${(subtotalConDescuento + costoEnvio).toFixed(2)}`;
     }
 
     function cambiarCantidad(id, delta) {

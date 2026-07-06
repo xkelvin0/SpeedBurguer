@@ -182,6 +182,7 @@ function agregarAlCarrito(id) {
             id: producto.id,
             nombre: producto.nombre,
             precio: producto.precioOferta ? producto.precioOferta : producto.precio,
+            precioOriginal: producto.precio,
             imagen: producto.imagen,
             categoria: producto.categoria,
             cantidad: 1
