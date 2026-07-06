@@ -168,6 +168,7 @@ function abrirModal(producto = null) {
   document.getElementById('form-desc').value = producto ? producto.descripcion : '';
   document.getElementById('form-precio').value = producto ? producto.precio : '';
   document.getElementById('form-precio-oferta').value = (producto && producto.precioOferta) ? producto.precioOferta : '';
+  document.getElementById('form-descuento').value = '0';
   document.getElementById('form-cat').value = producto ? producto.categoria : '';
   document.getElementById('form-img').value = producto ? producto.imagen : '';
 
@@ -399,4 +400,26 @@ function inicializarGraficos() {
 document.addEventListener('DOMContentLoaded', () => {
   inicializar();
   inicializarGraficos();
+
+  // Lógica de auto-cálculo de descuento
+  const inputPrecio = document.getElementById('form-precio');
+  const selectDescuento = document.getElementById('form-descuento');
+  const inputPrecioOferta = document.getElementById('form-precio-oferta');
+
+  if (inputPrecio && selectDescuento && inputPrecioOferta) {
+    function calcularDescuento() {
+      const precio = parseFloat(inputPrecio.value);
+      const descuento = parseInt(selectDescuento.value);
+      
+      if (!isNaN(precio) && descuento > 0) {
+        const oferta = precio - (precio * (descuento / 100));
+        inputPrecioOferta.value = oferta.toFixed(2);
+      } else if (descuento === 0) {
+        inputPrecioOferta.value = '';
+      }
+    }
+
+    inputPrecio.addEventListener('input', calcularDescuento);
+    selectDescuento.addEventListener('change', calcularDescuento);
+  }
 });
