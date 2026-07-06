@@ -168,7 +168,17 @@ function abrirModal(producto = null) {
   document.getElementById('form-desc').value = producto ? producto.descripcion : '';
   document.getElementById('form-precio').value = producto ? producto.precio : '';
   document.getElementById('form-precio-oferta').value = (producto && producto.precioOferta) ? producto.precioOferta : '';
-  document.getElementById('form-descuento').value = '0';
+  
+  if (producto && producto.precioOferta) {
+    const desc = Math.round(((producto.precio - producto.precioOferta) / producto.precio) * 100);
+    if ([10, 20, 30].includes(desc)) {
+      document.getElementById('form-descuento').value = desc.toString();
+    } else {
+      document.getElementById('form-descuento').value = '0';
+    }
+  } else {
+    document.getElementById('form-descuento').value = '0';
+  }
   document.getElementById('form-cat').value = producto ? producto.categoria : '';
   document.getElementById('form-img').value = producto ? producto.imagen : '';
 
