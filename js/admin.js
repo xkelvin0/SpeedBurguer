@@ -358,8 +358,10 @@ function inicializarGraficos() {
   const categorias = Object.keys(ventasPorCategoria);
   const datosCats = Object.values(ventasPorCategoria);
 
-  const etiquetasCircular = categorias.length > 0 ? categorias : ['Sin ventas'];
-  const datosCircular = categorias.length > 0 ? datosCats : [1];
+  const sinVentas = categorias.length === 0;
+  const etiquetasCircular = sinVentas ? ['Sin ventas aún'] : categorias;
+  const datosCircular = sinVentas ? [1] : datosCats;
+  const pieColors = sinVentas ? ['#333333'] : ['#d90429', '#ffbe00', '#2e86ab', '#f4a261', '#2ecc71', '#9b59b6'];
 
   const ctxPie = document.getElementById('pieChart').getContext('2d');
   new Chart(ctxPie, {
@@ -368,7 +370,7 @@ function inicializarGraficos() {
       labels: etiquetasCircular,
       datasets: [{
         data: datosCircular,
-        backgroundColor: ['#d90429', '#ffbe00', '#2e86ab', '#f4a261', '#2ecc71', '#9b59b6'],
+        backgroundColor: pieColors,
         borderWidth: 0
       }]
     },
@@ -379,6 +381,7 @@ function inicializarGraficos() {
         tooltip: {
           callbacks: {
             label: function(context) {
+              if (sinVentas) return 'Sin ventas aún';
               let label = context.label || '';
               if (label) { label += ': '; }
               const val = context.raw;
