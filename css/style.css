@@ -2555,17 +2555,30 @@ img {
 
     /* ===== HERO CARRITO ===== */
     .carrito-hero {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2e0a0a 60%, #1a1a1a 100%);
-      padding: 120px 20px 60px;
+      position: relative;
+      height: 40vh;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      overflow: hidden;
+      padding: 0 20px;
+    }
+    .carrito-hero-content {
+      position: relative;
+      z-index: 2;
     }
     .carrito-hero h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
     .carrito-hero h1 span { color: var(--rojo); }
-    .carrito-hero p { color: #aaa; margin-top: 10px; font-size: 1rem; }
+    .carrito-hero p { color: #ccc; font-size: 1.1rem; }
 
     /* ===== LAYOUT PRINCIPAL ===== */
     .carrito-section {
