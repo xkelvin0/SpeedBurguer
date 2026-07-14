@@ -51,7 +51,7 @@
       if (carrito.length === 0) {
         lista.innerHTML = `
           <div class="carrito-vacio">
-            <img src="img/empty_cart.png" alt="Carrito vacío" style="width: 150px; margin-bottom: 20px; opacity: 0.9;" />
+            <span>🛒</span>
             <h3>Tu carrito está vacío</h3>
             <p>Agrega productos desde nuestro menú para comenzar.</p>
             <a href="productos.html" class="btn-primary" style="display:inline-block; padding:13px 30px; font-size:1rem;">Ver Menú</a>
